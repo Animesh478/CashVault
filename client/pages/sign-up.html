@@ -3,24 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/sign-up.css">
     <title>Document</title>
 </head>
 <body>
-    <form class="form">
-        <div class="user-detail">
-            <label for="name">Name:</label>
-            <input type="text" class="name" id="name" name="name"></input>
-        </div>
-        <div class="user-detail">
-            <label for="email">Email:</label>
-            <input type="email" class="email" id="email" name="email"></input>
-        </div>
-        <div class="user-detail">
-            <label for="password">Password:</label>
-            <input type="text" class="password" id="password" name="password"></input>
-        </div>
-        <button type="submit">Sign Up</button>
+    <div class="container">
+        <div class="section-form">
+            <div class="section-form--details">
+                <h2>CashVault</h2>
+                <h1>Sign Up</h1>
+                <p>Join today to take control of your finances</p>
+                <form class="form">
+                    <div class="user-detail">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" class="name" id="name" name="name" placeholder="" required></input>
+                        <label for="name">Full Name</label>
+                    </div>
+                    <div class="user-detail">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" class="email" id="email" name="email" placeholder="" required></input>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="user-detail">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" class="password" id="password" name="password" placeholder="" required></input>
+                        <label for="password">Password</label>
+                    </div>
+                    <button type="submit">Create Account</button>
     </form>
+            </div>
+            <div class="section-form--img">
+                <img src="../assets/images/sign-up.png" alt="" >
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script type="module" src="../js/sign-up.js"></script>
 </body>
