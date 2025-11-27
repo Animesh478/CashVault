@@ -8,13 +8,16 @@ const submitForm = async function (e) {
   const password = formData.get("password");
 
   const userObj = { name, email, password };
-  console.log(userObj);
 
   try {
-    await axios.post("http://localhost:8000/user/signUp", userObj);
+    const res = await axios.post("http://localhost:8000/user/signUp", userObj);
+    console.log(res);
   } catch (error) {
     console.log(error);
   }
+
+  form.reset();
+  form.querySelector(":focus")?.blur(); //? removes the focus from the element that is focused upon
 };
 
 form.addEventListener("submit", submitForm);
