@@ -22,7 +22,7 @@ body {
   align-items: center;
 }
 
-.section-form {
+.section-login {
   width: 80rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -37,7 +37,7 @@ body {
   -o-border-radius: 1rem;
 }
 
-.section-form--details {
+.section-login--left {
   background-color: #f3f7ff;
   padding: 3rem;
 
@@ -55,14 +55,14 @@ body {
     margin-bottom: 3rem;
   }
 
-  & .form {
+  & .login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
     width: 100%;
 
-    & .user-detail {
+    & .login-form--details {
       position: relative;
       margin-bottom: 1.5rem;
       width: inherit;
@@ -114,24 +114,25 @@ body {
   }
 }
 
-.form .user-detail input:not(:placeholder-shown) ~ label,
-.form .user-detail input:focus ~ label {
+.login-form .login-form--details input:not(:placeholder-shown) ~ label,
+.login-form .login-form--details input:focus ~ label {
   top: -0.1rem; /* Move the label up outside the input field */
   font-size: 12px;
   color: #4c51bf;
 }
-.section-form--img {
+
+.section-login--right {
   overflow: hidden;
 }
 
-.section-form--img img {
+.section-login--right img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.section-form .form button {
+.login-form button {
   width: 100%;
   outline: none;
   cursor: pointer;
@@ -151,6 +152,6 @@ body {
   -o-border-radius: 1.2rem;
 }
 
-.section-form .form button:hover {
+.login-form button:hover {
   background-color: #68b372;
 }
