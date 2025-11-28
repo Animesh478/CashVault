@@ -15,6 +15,25 @@ const userSignUp = async function (req, res) {
   return res.json({ success: "User added successfully" });
 };
 
+const userLogin = async function (req, res) {
+  const { email, password } = req.body;
+  try {
+    const user = await getUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    // if the user exists, verify the password
+    if (user.password === password) {
+      return res.status(200).json({ message: "Login successful" });
+    } else {
+      return res.status(401).json({ error: "User not authorized" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   userSignUp,
+  userLogin,
 };
