@@ -10,7 +10,11 @@ const loginUser = async function (e) {
   const userObj = { email, password };
   console.log(userObj);
   try {
-    await axios.post("http://localhost:8000/user/login", userObj);
+    const response = await axios.post(
+      "http://localhost:8000/user/login",
+      userObj
+    );
+    console.log(response);
   } catch (error) {
     console.log(error);
   }

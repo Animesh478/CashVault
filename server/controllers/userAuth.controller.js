@@ -1,4 +1,8 @@
-const { getUserByEmail, addUser } = require("../services/userAuth.services");
+const {
+  getUserByEmail,
+  addUser,
+  verifyPassword,
+} = require("../services/userAuth.services");
 
 const userSignUp = async function (req, res) {
   const { name, email, password } = req.body;
@@ -23,7 +27,8 @@ const userLogin = async function (req, res) {
       return res.status(404).json({ error: "User not found" });
     }
     // if the user exists, verify the password
-    if (user.password === password) {
+    const result = await verifyPassword(user, password);
+    if (result) {
       return res.status(200).json({ message: "Login successful" });
     } else {
       return res.status(401).json({ error: "User not authorized" });
