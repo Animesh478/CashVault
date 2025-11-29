@@ -16,16 +16,11 @@ const getUserByEmail = async function (email) {
 
 const addUser = async function ({ name, email, password }) {
   try {
-    bcrypt.hash(password, 10, async (err, hash) => {
-      if (err) {
-        console.log(err);
-      } else {
-        return await UserModel.create({
-          fullName: name,
-          email,
-          password: hash,
-        });
-      }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return await UserModel.create({
+      fullName: name,
+      email,
+      password: hashedPassword,
     });
   } catch (error) {
     console.log(error);

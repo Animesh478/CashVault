@@ -7,18 +7,17 @@ const {
 const userSignUp = async function (req, res) {
   const { name, email, password } = req.body;
   try {
-    const user = await getUserByEmail(email);
-    if (user) {
+    const existingUser = await getUserByEmail(email);
+    if (existingUser) {
       return res.status(404).json({ error: "User already exists" });
     }
   } catch (error) {
     console.log(error);
   }
 
-  await addUser({ name, email, password });
-  return res.json({ success: "User added successfully" });
+  const user = await addUser({ name, email, password });
+  return res.json({ success: "User added successfully", user });
 };
-
 const userLogin = async function (req, res) {
   const { email, password } = req.body;
   try {
