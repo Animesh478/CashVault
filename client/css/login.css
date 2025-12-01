@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
+:root {
+  --primary-green: #00bc2a;
+  --form-background: ##f3f7ff;
+  --placeholder-color: #a0aec0;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -138,12 +144,13 @@ body {
   cursor: pointer;
   font-size: 1.5rem;
   color: #fff;
-  font-weight: 600;
-  background-color: #89b78e;
-  /*background-color: #68b372;
-  */
+  font-weight: 500;
+  background-color: #00bc2a;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
   border: none;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   padding: 0.8rem 0;
   border-radius: 1.2rem;
   -webkit-border-radius: 1.2rem;
@@ -153,5 +160,27 @@ body {
 }
 
 .login-form button:hover {
-  background-color: #68b372;
+  box-shadow: #00bc2a 0px 1px 4px;
+  background-color: #f3f7ff;
+  color: #00bc2a;
+}
+
+.sign-up-redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sign-up-redirect p {
+  margin: 0;
+}
+
+.sign-up-redirect a {
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.sign-up-redirect a:hover {
+  color: #00bc2a;
 }
