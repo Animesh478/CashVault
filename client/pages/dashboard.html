@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-left">
+          <h1>CashVault</h1>
+        </div>
+        <div class="navbar-right">
+          <ul class="nav-links">
+            <li class="nav-link">
+              <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-link">
+              <a href="login.html">Login</a>
+            </li>
+            <li class="nav-link">
+              <a href="sign-up.html">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="welcome-message">
+        <!--todo: the welcome message will come inside the h1 from the server -->
+        <h1>Welcome, User</h1>
+      </div>
+      <div class="budget-track-form">
+        <form class="form">
+          <div class="amount-box box">
+            <label for="expense-amount">Expense Amount</label>
+            <input
+              type="number"
+              name="expense-amount"
+              id="expense-amount"
+              required
+            />
+          </div>
+          <div class="description-box box">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" required />
+          </div>
+          <div class="category-box box">
+            <label for="category">Category</label>
+            <select name="category" id="category">
+              <option value="food">Food</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="essentials">Essentials</option>
+              <option value="investment">Investment</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <!-- ========== Start Transaction Section ========== -->
+      <div class="transaction-container">
+        <h1>Recent Transactions</h1>
+        <div class="transactions-list"></div>
+        <template>
+          <div class="transaction">
+            <div class="transaction-description-category">
+              <div class="transaction-description"></div>
+              <div class="transaction-category"></div>
+            </div>
+            <div class="transaction-date"></div>
+            <div class="transaction-amount"></div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- ========== End Transaction Section ========== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="../js/expense.js"></script>
+  </body>
+</html>

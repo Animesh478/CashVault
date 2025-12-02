@@ -12,7 +12,7 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 app.use("/user", router);
-app.use("/user", expenseRouter);
+app.use("/expense", expenseRouter);
 
 sequelize
   .sync({ force: true })
