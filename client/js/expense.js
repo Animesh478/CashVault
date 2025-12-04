@@ -1,6 +1,17 @@
 const form = document.querySelector(".form");
 const expenseList = document.querySelector(".transactions-list");
 
+const getUserDetails = async function () {
+  const result = await axios.get("http://localhost:8000/user/getUser", {
+    withCredentials: true,
+  });
+  const welcomeMessageElement = document.querySelector(".welcome-message");
+  const greeting = document.createElement("h1");
+  greeting.textContent = `Welcome, ${result.data.user.fullName}`.toUpperCase();
+  welcomeMessageElement.appendChild(greeting);
+  console.log(result);
+};
+
 const getAllExpenses = async function () {
   const result = await axios.get("http://localhost:8000/expense/allExpenses");
   return result.data;
@@ -45,6 +56,7 @@ const submitExpenseForm = async function (e) {
 
 const init = async function () {
   await displayAllExpenses();
+  await getUserDetails();
   form.addEventListener("submit", submitExpenseForm);
 };
 

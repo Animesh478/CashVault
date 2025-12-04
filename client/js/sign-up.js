@@ -11,6 +11,9 @@ const submitForm = async function (e) {
 
   try {
     const res = await axios.post("http://localhost:8000/user/signUp", userObj);
+    if (res.data.redirectURL) {
+      window.location.href = res.data.redirectURL;
+    }
     console.log(res);
   } catch (error) {
     console.log(error);

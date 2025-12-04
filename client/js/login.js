@@ -8,12 +8,17 @@ const loginUser = async function (e) {
   const password = formData.get("password");
 
   const userObj = { email, password };
-  console.log(userObj);
   try {
     const response = await axios.post(
       "http://localhost:8000/user/login",
-      userObj
+      userObj,
+      {
+        withCredentials: true,
+      }
     );
+    if (response.data.redirectURL) {
+      window.location.href = response.data.redirectURL;
+    }
     console.log(response);
   } catch (error) {
     console.log(error);
