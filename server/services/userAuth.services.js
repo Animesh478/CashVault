@@ -44,7 +44,9 @@ const createJWT = function (user) {
   const payload = {
     id: user.id,
     email: user.email,
+    name: user.fullName,
   };
+
   const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
     expiresIn: "1d",
   });

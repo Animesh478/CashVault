@@ -26,14 +26,16 @@ const userSignUp = async function (req, res) {
 const userLogin = async function (req, res) {
   const { email, password } = req.body;
   try {
-    const user = await getUserByEmail(email);
+    const user = await getUserByEmail(email); //returns a Sequelize Model instance
+    const userObj = user.toJSON(); // converts the instance into js object
+    console.log("user auth=", userObj);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
     // if the user exists, verify the password
     const result = await verifyPassword(user, password);
     if (result) {
-      const token = createJWT(user);
+      const token = createJWT(userObj);
       // console.log("token:", token);
       res.cookie("access_token", token, {
         httpOnly: true,

@@ -5,9 +5,9 @@ const {
 const { getUserByEmail } = require("../services/userAuth.services");
 
 const addExpense = async function (req, res) {
-  console.log("inside expense controller");
   const { expenseAmount, description, category } = req.body;
   const user = req.user;
+  console.log("inside expense=", user);
 
   try {
     const newExpense = await createUserExpense(

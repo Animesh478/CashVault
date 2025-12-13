@@ -3,8 +3,8 @@ const { Cashfree, CFEnvironment } = require("cashfree-pg");
 // creating an instance of cashfree
 const cashfree = new Cashfree(
   CFEnvironment.SANDBOX,
-  "TEST430329ae80e0f32e41a393d78b923034",
-  "TESTaf195616268bd6202eeb3bf8dc458956e7192a85"
+  process.env.CASHFREE_APP_ID,
+  process.env.CASHFREE_SECRET_KEY
 );
 
 const createOrder = async function ({
@@ -26,8 +26,8 @@ const createOrder = async function ({
       customer_phone: customerPhone,
     },
     order_meta: {
-      return_url: "http://localhost:8000/payment/payment-status",
-      payment_methods: "cc,dc,upi",
+      return_url: `http://localhost:8000/payment/payment-status?order_id=${orderId}`,
+      payment_methods: "cc,dc,upi,nb",
     },
     order_expiry_time: formattedExpiryTime,
   };

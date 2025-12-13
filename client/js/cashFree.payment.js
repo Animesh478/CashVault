@@ -8,6 +8,7 @@ const buyPremium = async function () {
   try {
     const { data } = await axios.post(
       "http://localhost:8000/payment/create-order",
+      {},
       {
         withCredentials: true,
       }
@@ -19,7 +20,7 @@ const buyPremium = async function () {
       paymentSessionId,
       redirectTarget: "_self",
     };
-    // cashfree.checkout(checkoutOptions);
+    cashfree.checkout(checkoutOptions);
   } catch (error) {
     console.log(error);
   }
