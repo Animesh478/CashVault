@@ -1,23 +1,56 @@
-const { ExpenseModel } = require("../models/index");
-const { getExpensesFromDatabase } = require("../services/expense.service");
+const {
+  getUserExpenses,
+  createUserExpense,
+} = require("../services/expense.service");
+const { getUserByEmail } = require("../services/userAuth.services");
 
 const addExpense = async function (req, res) {
+  console.log("inside expense controller");
   const { expenseAmount, description, category } = req.body;
-  console.log("amount:", typeof expenseAmount);
-  const expense = await ExpenseModel.create({
-    expenseAmount: Number(expenseAmount),
-    description,
-    category,
-  });
-  res.status(201).json({ message: "Expense added", expense });
+  const user = req.user;
+
+  try {
+    const newExpense = await createUserExpense(
+      expenseAmount,
+      description,
+      category,
+      user
+    );
+
+    return res.status(201).json({ message: "Expense added", newExpense });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({ error });
+  }
 };
 
 const getAllExpenses = async function (req, res) {
-  const result = await getExpensesFromDatabase();
-  res.status(200).json(result);
+  const user = req.user;
+  try {
+    const result = await getUserExpenses(user.id);
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getUserData = async function (req, res) {
+  if (!req.user) {
+    return res.status(401).json({ message: "User not authorized" });
+  }
+  try {
+    const user = await getUserByEmail(req.user.email);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {
   addExpense,
   getAllExpenses,
+  getUserData,
 };

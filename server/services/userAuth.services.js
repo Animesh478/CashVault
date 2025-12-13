@@ -34,7 +34,6 @@ const createHashPassword = async function (password) {
 const verifyPassword = async function (user, password) {
   try {
     const result = await bcrypt.compare(password, user.password);
-    console.log(result);
     return result;
   } catch (error) {
     console.log(error);

@@ -6,23 +6,23 @@ const cookieParser = require("cookie-parser");
 const { sequelize } = require("./models/index");
 const userRouter = require("./routes/userAuth.routes");
 const expenseRouter = require("./routes/expense.routes");
-const { authenticateUserMiddleware } = require("./middlewares/auth.middleware");
+const paymentRouter = require("./routes/payment.routes");
 
 const app = express();
 const PORT = process.env.PORT;
 
 app.use(
   cors({
-    origin: "http://localhost:5500",
+    origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
     credentials: true,
   })
 );
 app.use(express.json());
 app.use(cookieParser());
-app.use(authenticateUserMiddleware);
 
 app.use("/user", userRouter);
 app.use("/expense", expenseRouter);
+app.use("/payment", paymentRouter);
 
 sequelize
   .sync()

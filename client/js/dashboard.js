@@ -1,8 +1,10 @@
+// import axios from "axios";
+
 const form = document.querySelector(".form");
 const expenseList = document.querySelector(".transactions-list");
 
 const getUserDetails = async function () {
-  const result = await axios.get("http://localhost:8000/user/getUser", {
+  const result = await axios.get("http://localhost:8000/expense/getUser", {
     withCredentials: true,
   });
   const welcomeMessageElement = document.querySelector(".welcome-message");
@@ -13,7 +15,9 @@ const getUserDetails = async function () {
 };
 
 const getAllExpenses = async function () {
-  const result = await axios.get("http://localhost:8000/expense/allExpenses");
+  const result = await axios.get("http://localhost:8000/expense/allExpenses", {
+    withCredentials: true,
+  });
   return result.data;
 };
 
@@ -49,15 +53,18 @@ const submitExpenseForm = async function (e) {
 
   const expenseObj = { expenseAmount, description, category };
 
-  await axios.post("http://localhost:8000/expense/addExpense", expenseObj);
+  await axios.post("http://localhost:8000/expense/addExpense", expenseObj, {
+    withCredentials: true,
+  });
 
   await displayAllExpenses();
 };
 
+form.addEventListener("submit", submitExpenseForm);
+
 const init = async function () {
   await displayAllExpenses();
   await getUserDetails();
-  form.addEventListener("submit", submitExpenseForm);
 };
 
 init();

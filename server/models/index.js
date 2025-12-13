@@ -4,9 +4,21 @@ const sequelize = require("../config/db");
 //? Load all the models
 const UserModel = require("./user.model")(sequelize, DataTypes);
 const ExpenseModel = require("./expense.model")(sequelize, DataTypes);
+const OrderModel = require("./order.model")(sequelize, DataTypes);
 
 //todo: Define associations
-UserModel.hasMany(ExpenseModel);
-ExpenseModel.belongsTo(UserModel);
+UserModel.hasMany(ExpenseModel, {
+  foreignKey: "userId",
+});
+ExpenseModel.belongsTo(UserModel, {
+  foreignKey: "userId",
+});
 
-module.exports = { sequelize, UserModel, ExpenseModel };
+UserModel.hasMany(OrderModel, {
+  foreignKey: "userId",
+});
+OrderModel.belongsTo(UserModel, {
+  foreignKey: "userId",
+});
+
+module.exports = { sequelize, UserModel, ExpenseModel, OrderModel };

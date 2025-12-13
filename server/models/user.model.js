@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    isPremium: {
+      type: DataTypes.STRING,
+      defaultValue: "false",
+    },
   });
 
   return User;

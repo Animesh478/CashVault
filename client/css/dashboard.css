@@ -46,6 +46,17 @@ body {
       text-decoration: none;
       font-size: 1.8rem;
     }
+
+    & .premium-btn {
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      border-radius: 1rem;
+      -webkit-border-radius: 1rem;
+      -moz-border-radius: 1rem;
+      -ms-border-radius: 1rem;
+      -o-border-radius: 1rem;
+    }
   }
 }
 
@@ -139,7 +150,7 @@ body {
   height: 40rem;
   grid-column: span 2/4;
   overflow-y: auto;
-  /*toallowscrolling*/
+  /*to allow scrolling*/
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none;
   border-radius: 1rem;
@@ -164,7 +175,7 @@ body {
 .transaction {
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 2fr) 1fr;
   font-size: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 1rem;
@@ -186,6 +197,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  & .action {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+
+    & .btn {
+      border: none;
+      cursor: pointer;
+    }
   }
 }
 /* ========== End Transaction Details Section ========== */

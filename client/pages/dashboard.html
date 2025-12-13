@@ -8,6 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
     <link rel="stylesheet" href="../css/dashboard.css" />
+    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -27,13 +28,16 @@
             <li class="nav-link">
               <a href="sign-up.html">Sign Up</a>
             </li>
+            <li class="nav-link">
+              <button class="premium-btn">Go Premium</button>
+            </li>
           </ul>
         </div>
       </nav>
     </header>
     <div class="container">
       <div class="welcome-message">
-        <!--todo: the welcome message will come inside the h1 from the server -->
+        <!--?done: the welcome message will come inside the h1 from the server -->
         <!-- <h1>Welcome, User</h1> -->
       </div>
       <div class="budget-track-form">
@@ -76,6 +80,18 @@
             </div>
             <div class="transaction-date"></div>
             <div class="transaction-amount"></div>
+            <div class="action">
+              <div class="update-transaction">
+                <button class="btn edit-btn">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </div>
+              <div class="delete-transaction">
+                <button class="btn delete-btn">
+                  <i class="fa-solid fa-trash-can" style="color: #e96767"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </template>
       </div>
@@ -84,6 +100,7 @@
     <!-- ========== End Transaction Section ========== -->
 
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
-    <script src="../js/expense.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/cashFree.payment.js"></script>
   </body>
 </html>
