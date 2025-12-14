@@ -42,6 +42,17 @@ const createOrder = async function ({
   }
 };
 
+const verifyPaymentStatus = async function (orderId) {
+  try {
+    const response = await cashfree.PGOrderFetchPayments(orderId);
+    console.log("payments=", response.data);
+    return response.data; //response.data is an array of payments
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createOrder,
+  verifyPaymentStatus,
 };

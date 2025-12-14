@@ -16,8 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       field: "payment_session_id",
     },
     status: {
-      type: DataTypes.ENUM("ACTIVE", "PAID", "FAILED", "CANCELLED", "REFUNDED"),
-      defaultValue: "ACTIVE",
+      type: DataTypes.ENUM("SUCCESS", "FAILED", "PENDING"),
     },
     userId: {
       type: DataTypes.INTEGER,
