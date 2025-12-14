@@ -1,4 +1,4 @@
-const { verifyJWT } = require("../services/userAuth.services");
+const { verifyJWT } = require("../services/userAuth.service");
 
 const authenticateUserMiddleware = function (req, res, next) {
   const token = req.cookies.access_token;

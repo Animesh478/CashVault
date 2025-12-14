@@ -30,6 +30,11 @@
                         <input type="password" class="password" id="password" name="password" placeholder="" required></input>
                         <label for="password">Password</label>
                     </div>
+                    <div class="user-detail">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" class="phone-number" id="phone-number" name="phone-number" pattern="[6-9][0-9]{9}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="10" placeholder="" required></input>
+                        <label for="phone-number">Mobile Number</label>
+                    </div>
                     <button type="submit">Create Account</button>
     </form>
             </div>

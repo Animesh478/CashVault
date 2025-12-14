@@ -13,6 +13,7 @@ const createOrder = async function ({
   orderCurrency = "INR",
   customerId,
   customerPhone,
+  customerMail,
 }) {
   const expiryTime = new Date(Date.now() + 60 * 60 * 1000);
   const formattedExpiryTime = expiryTime.toISOString();
@@ -23,6 +24,7 @@ const createOrder = async function ({
     order_id: orderId,
     customer_details: {
       customer_id: customerId,
+      customer_email: customerMail,
       customer_phone: customerPhone,
     },
     order_meta: {

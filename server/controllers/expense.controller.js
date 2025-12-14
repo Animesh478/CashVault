@@ -2,7 +2,7 @@ const {
   getUserExpenses,
   createUserExpense,
 } = require("../services/expense.service");
-const { getUserByEmail } = require("../services/userAuth.services");
+const { getUserByEmail } = require("../services/user.service");
 
 const addExpense = async function (req, res) {
   const { expenseAmount, description, category } = req.body;

@@ -15,6 +15,7 @@ const processPayment = async function (req, res) {
   const orderCurrency = "INR";
   const customerId = id.toString();
   const customerPhone = "9999999999";
+  const customerMail = email;
 
   try {
     const order = await OrderModel.create({
@@ -30,6 +31,7 @@ const processPayment = async function (req, res) {
       orderCurrency,
       customerId,
       customerPhone,
+      customerMail,
     });
     console.log(data);
 

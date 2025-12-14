@@ -1,13 +1,12 @@
+const { addUser, getUserByEmail } = require("../services/user.service");
 const {
-  getUserByEmail,
-  addUser,
   verifyPassword,
   createHashPassword,
   createJWT,
-} = require("../services/userAuth.services");
+} = require("../services/userAuth.service");
 
 const userSignUp = async function (req, res) {
-  const { name, email, password } = req.body;
+  const { name, email, password, phoneNumber } = req.body;
   try {
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
@@ -18,7 +17,12 @@ const userSignUp = async function (req, res) {
   }
 
   const hashedPassword = await createHashPassword(password);
-  const user = await addUser({ name, email, password: hashedPassword });
+  const user = await addUser({
+    name,
+    email,
+    password: hashedPassword,
+    phoneNumber,
+  });
   const redirectURL = "http://localhost:5500/client/pages/login.html";
   return res.json({ success: "User added successfully", user, redirectURL });
 };

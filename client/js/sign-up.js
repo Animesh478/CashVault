@@ -6,8 +6,9 @@ const submitForm = async function (e) {
   const name = formData.get("name");
   const email = formData.get("email");
   const password = formData.get("password");
+  const phoneNumber = formData.get("phone-number");
 
-  const userObj = { name, email, password };
+  const userObj = { name, email, password, phoneNumber };
 
   try {
     const res = await axios.post("http://localhost:8000/user/signUp", userObj);

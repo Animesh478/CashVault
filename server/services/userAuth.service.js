@@ -1,32 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const { UserModel } = require("../models/index");
-
-const getUserByEmail = async function (email) {
-  try {
-    return await UserModel.findOne({
-      where: {
-        email,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const addUser = async function ({ name, email, password }) {
-  try {
-    return await UserModel.create({
-      fullName: name,
-      email,
-      password,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const createHashPassword = async function (password) {
   return await bcrypt.hash(password, 10);
 };
@@ -58,8 +32,6 @@ const verifyJWT = function (token) {
 };
 
 module.exports = {
-  getUserByEmail,
-  addUser,
   verifyPassword,
   createHashPassword,
   createJWT,
