@@ -212,3 +212,9 @@ body {
   }
 }
 /* ========== End Transaction Details Section ========== */
+
+/* ========== Start Premium Section ========== */
+.premium_feature {
+  display: none;
+}
+/* ========== End Premium Section ========== */

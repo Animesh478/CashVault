@@ -1,5 +1,3 @@
-// import axios from "axios";
-
 const form = document.querySelector(".form");
 const expenseList = document.querySelector(".transactions-list");
 
@@ -60,7 +58,13 @@ const submitExpenseForm = async function (e) {
   await displayAllExpenses();
 };
 
+const deleteExpense = async function (e) {
+  console.log(e.currentTarget);
+};
+
 form.addEventListener("submit", submitExpenseForm);
+
+expenseList.addEventListener("click", deleteExpense);
 
 const init = async function () {
   await displayAllExpenses();
