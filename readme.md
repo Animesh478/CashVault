@@ -18,3 +18,9 @@
 
 - Validate phone number from backend
 - Payment status verification using webhook
+
+# Colors
+
+- primary: #29756F
+- #348781
+- linear-gradient(2deg,rgba(73, 144, 139, 1) 100%, rgba(97, 167, 162, 1) 100%);

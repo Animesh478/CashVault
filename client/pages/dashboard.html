@@ -7,7 +7,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/common.css" />
     <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/leaderboard.css" />
     <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <title>Document</title>
   </head>
@@ -28,11 +31,14 @@
             <li class="nav-link">
               <a href="sign-up.html">Sign Up</a>
             </li>
+            <!-- <li class="nav-link">
+              <a href="" class="leaderboard_btn">Leaderboard</a>
+            </li> -->
             <li class="nav-link">
               <button class="premium-btn">Go Premium</button>
             </li>
             <li class="nav-link">
-              <button class="show_leaderboard premium_feature">
+              <button class="leaderboard_btn premium_feature">
                 Leaderboard
               </button>
             </li>
@@ -77,7 +83,7 @@
       <div class="transaction-container">
         <h1>Recent Transactions</h1>
         <div class="transactions-list"></div>
-        <template>
+        <template class="transaction-template">
           <div class="transaction">
             <div class="transaction-description-category">
               <div class="transaction-description"></div>
@@ -104,8 +110,44 @@
 
     <!-- ========== End Transaction Section ========== -->
 
+    <!-- ========== Start LeaderBoard Section ========== -->
+    <div id="overlay" class="overlay hidden"></div>
+    <div class="container_leaderboard hidden">
+      <div class="leaderboard_header">
+        <h1>Leaderboard</h1>
+      </div>
+      <div class="leaderboard_ranking">
+        <div class="ranking_list">
+          <div class="col_names grid_3-cols">
+            <p class="col_name-rank">Rank</p>
+            <p class="col_name-rank_holder">Name</p>
+            <p class="col_name-total_expense">Expenses</p>
+          </div>
+          <div class="rank_row grid_3-cols">
+            <div class="user_rank">1</div>
+            <div class="user_name">Test</div>
+            <div class="user_total-expense">100</div>
+          </div>
+          <div class="rank_row grid_3-cols">
+            <div class="user_rank">1</div>
+            <div class="user_name">Test</div>
+            <div class="user_total-expense">100</div>
+          </div>
+        </div>
+        <template class="ranking_template">
+          <div class="rank_row grid_3-cols">
+            <div class="user_rank"></div>
+            <div class="user_name"></div>
+            <div class="user_total-expense"></div>
+          </div>
+        </template>
+      </div>
+    </div>
+    <!-- ========== End LeaderBoard Section ========== -->
+
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script src="../js/dashboard.js"></script>
     <script src="../js/cashFree.payment.js"></script>
+    <script src="../js/premium.features.js"></script>
   </body>
 </html>

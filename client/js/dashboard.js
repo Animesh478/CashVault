@@ -23,7 +23,7 @@ const displayAllExpenses = async function () {
   expenseList.innerHTML = "";
   const expenses = await getAllExpenses();
   expenses.forEach((expense) => {
-    const template = document.querySelector("template");
+    const template = document.querySelector(".transaction-template");
     const expenseCard = template.content.cloneNode(true);
 
     // adding values to the template

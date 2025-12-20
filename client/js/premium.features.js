@@ -1,5 +1,18 @@
-const leaderboardBtn = document.querySelector(".show_leaderboard");
+const leaderboardBtn = document.querySelector(".leaderboard_btn");
+const overlay = document.getElementById("overlay");
+const leaderboardModal = document.querySelector(".container_leaderboard");
 
-const showLeaderBoard = function () {};
+// ? open and close leaderboard modal
+const showLeaderboard = function () {
+  console.log(overlay.classList);
+  overlay.classList.remove("hidden");
+  leaderboardModal.classList.remove("hidden");
+};
 
-leaderboardBtn.addEventListener("click", showLeaderBoard);
+const closeLeaderboard = function () {
+  overlay.classList.add("hidden");
+  leaderboardModal.classList.add("hidden");
+};
+
+leaderboardBtn.addEventListener("click", showLeaderboard);
+overlay.addEventListener("click", closeLeaderboard);

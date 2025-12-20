@@ -1,0 +1,67 @@
+.container_leaderboard {
+  margin: 10rem auto;
+  width: 80rem;
+  height: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: fixed;
+  z-index: 200;
+  background-color: #fff;
+  inset: 0;
+  border: 1px solid #29756f;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+
+  & .leaderboard_header {
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #29756f;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 1.5rem 0;
+  }
+
+  & .leaderboard_ranking {
+    width: inherit;
+  }
+}
+
+.grid_3-cols {
+  display: grid;
+  width: inherit;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.ranking_list .col_names {
+  font-size: 1.8rem;
+  color: #29756f;
+  border-bottom: 1px solid #29756f;
+  margin-bottom: 1.5rem;
+}
+
+.ranking_list .rank_row {
+  font-size: 1.6rem;
+  color: #29756f;
+  margin-bottom: 0.6rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
