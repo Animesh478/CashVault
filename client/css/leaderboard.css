@@ -1,3 +1,12 @@
+:root {
+  --primary-teal: #20373f;
+  --secondary-teal: #274c55;
+  --box-shadow-color: #29756f;
+  --form-background: ##f3f7ff;
+  --placeholder-color: #a0aec0;
+  --font-color: #fff;
+}
+
 .container_leaderboard {
   margin: 10rem auto;
   width: 80rem;

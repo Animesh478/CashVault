@@ -24,3 +24,8 @@
 - primary: #29756F
 - #348781
 - linear-gradient(2deg,rgba(73, 144, 139, 1) 100%, rgba(97, 167, 162, 1) 100%);
+- #FF6B6B
+- #F7B32B
+- #20373F
+- #3BC0BF
+- #274C55
