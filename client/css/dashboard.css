@@ -128,6 +128,17 @@ body {
         -o-border-radius: 0.6rem;
       }
 
+      #expense-amount {
+        -webkit-appearance: textfield; /* Chrome/Safari */
+        -moz-appearance: textfield; /* Firefox */
+        appearance: textfield;
+      }
+
+      #expense-amount::-webkit-outer-spin-button,
+      #expense-amount::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
       & select {
         width: 70%;
         font-size: 1.5rem;

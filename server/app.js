@@ -7,6 +7,7 @@ const { sequelize } = require("./models/index");
 const userRouter = require("./routes/userAuth.routes");
 const expenseRouter = require("./routes/expense.routes");
 const paymentRouter = require("./routes/payment.routes");
+const premiumRouter = require("./routes/premium.routes");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/user", userRouter);
 app.use("/expense", expenseRouter);
 app.use("/payment", paymentRouter);
+app.use("/premium", premiumRouter);
 
 sequelize
   .sync()

@@ -14,6 +14,14 @@
 - Update the Orders table accordingly
 - Also update the User table
 
+# Leaderboard
+
+- Make a get request to '/premium/leaderboard' route
+- Get all the users along with their total expenses
+- Sort the users based on their total expenses
+- Rank the users
+- Highlight the current user
+
 # To-do
 
 - Validate phone number from backend
