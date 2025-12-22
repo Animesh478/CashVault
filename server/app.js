@@ -27,7 +27,7 @@ app.use("/payment", paymentRouter);
 app.use("/premium", premiumRouter);
 
 sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log("Database Synced");

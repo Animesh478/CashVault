@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: "false",
     },
+    totalExpenses: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   });
 
   return User;

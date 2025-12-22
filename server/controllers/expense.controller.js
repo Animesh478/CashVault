@@ -2,13 +2,16 @@ const {
   getUserExpenses,
   createUserExpense,
 } = require("../services/expense.service");
-const { getUserByEmail } = require("../services/user.service");
+const {
+  getUserByEmail,
+  updateTotalExpenses,
+} = require("../services/user.service");
 
 const addExpense = async function (req, res) {
   const { expenseAmount, description, category } = req.body;
   const user = req.user;
   console.log("inside expense=", user);
-
+  updateTotalExpenses(expenseAmount, user.id);
   try {
     const newExpense = await createUserExpense(
       expenseAmount,

@@ -1,4 +1,5 @@
 const { UserModel } = require("../models/index");
+const { getUserExpenses } = require("./expense.service");
 
 const addUser = async function ({ name, email, password, phoneNumber }) {
   try {
@@ -25,7 +26,26 @@ const getUserByEmail = async function (email) {
   }
 };
 
+const updateTotalExpenses = async function (expenseAmount, userId) {
+  try {
+    // total expense = total expense + expenseAmount
+    await UserModel.increment(
+      {
+        totalExpenses: expenseAmount,
+      },
+      {
+        where: {
+          id: userId,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   addUser,
   getUserByEmail,
+  updateTotalExpenses,
 };
