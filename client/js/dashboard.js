@@ -2,7 +2,7 @@ const form = document.querySelector(".form");
 const expenseList = document.querySelector(".transactions-list");
 
 const getUserDetails = async function () {
-  const result = await axios.get("http://localhost:8000/expense/getUser", {
+  const result = await axios.get("http://localhost:8000/user/me", {
     withCredentials: true,
   });
   const welcomeMessageElement = document.querySelector(".welcome-message");

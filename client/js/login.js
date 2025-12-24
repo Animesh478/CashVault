@@ -10,7 +10,7 @@ const loginUser = async function (e) {
   const userObj = { email, password };
   try {
     const response = await axios.post(
-      "http://localhost:8000/user/login",
+      "http://localhost:8000/user-auth/login",
       userObj,
       {
         withCredentials: true,

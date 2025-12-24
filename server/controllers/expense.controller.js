@@ -2,17 +2,14 @@ const {
   getUserExpenses,
   createUserExpense,
 } = require("../services/expense.service");
-const {
-  getUserByEmail,
-  updateTotalExpenses,
-} = require("../services/user.service");
+const { updateTotalExpenses } = require("../services/user.service");
 
 const addExpense = async function (req, res) {
   const { expenseAmount, description, category } = req.body;
   const user = req.user;
   console.log("inside expense=", user);
-  updateTotalExpenses(expenseAmount, user.id);
   try {
+    await updateTotalExpenses(expenseAmount, user.id); //update the total expenses for a user
     const newExpense = await createUserExpense(
       expenseAmount,
       description,
@@ -37,23 +34,7 @@ const getAllExpenses = async function (req, res) {
   }
 };
 
-const getUserData = async function (req, res) {
-  if (!req.user) {
-    return res.status(401).json({ message: "User not authorized" });
-  }
-  try {
-    const user = await getUserByEmail(req.user.email);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    return res.status(200).json({ user });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 module.exports = {
   addExpense,
   getAllExpenses,
-  getUserData,
 };

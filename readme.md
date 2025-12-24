@@ -24,8 +24,12 @@
 
 # To-do
 
+- When the user opens the website he will be first redirected to the login page
+- how to decide the expiry of the jwt token, so that after sometime the user has to login again
+- logout button
 - Validate phone number from backend
 - Payment status verification using webhook
+- Edit and Delete button functionality
 
 # Colors
 

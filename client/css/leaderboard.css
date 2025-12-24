@@ -53,15 +53,14 @@
 
 .leaderboard_ranking .col_names {
   font-size: 1.8rem;
-  color: #29756f;
-  border-bottom: 1px solid #29756f;
-  margin-bottom: 1.5rem;
+  color: var(--box-shadow-color);
+  border-bottom: 1px solid var(--box-shadow-color);
 }
 
 .ranking_list .rank_row {
   font-size: 1.6rem;
-  color: #29756f;
-  margin-bottom: 0.6rem;
+  color: var(--box-shadow-color);
+  padding: 1rem 0;
 }
 
 .hidden {
@@ -73,4 +72,9 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
   z-index: 100;
+}
+
+.ranking_list .highlight_current_user {
+  background-color: var(--primary-teal);
+  color: var(--font-color);
 }
