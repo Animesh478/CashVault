@@ -1,4 +1,4 @@
-const { UserModel } = require("../models/index");
+const { UserModel, sequelize } = require("../models/index");
 
 const addUser = async function ({ name, email, password, phoneNumber }) {
   try {
@@ -36,6 +36,7 @@ const getUserData = async function (email) {
 
 const updateTotalExpenses = async function (expenseAmount, userId) {
   try {
+    const t = await sequelize.transaction();
     // total expense = total expense + expenseAmount
     await UserModel.increment(
       {
@@ -45,10 +46,15 @@ const updateTotalExpenses = async function (expenseAmount, userId) {
         where: {
           id: userId,
         },
+      },
+      {
+        transaction: t,
       }
     );
+    await t.commit();
   } catch (error) {
     console.log(error);
+    await t.rollback();
   }
 };
 

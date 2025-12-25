@@ -1,4 +1,4 @@
-const { ExpenseModel } = require("../models/index");
+const { ExpenseModel, sequelize } = require("../models/index");
 
 const getUserExpenses = async function (userId) {
   const result = await ExpenseModel.findAll({
@@ -15,12 +15,25 @@ const createUserExpense = async function (
   category,
   user
 ) {
-  return await ExpenseModel.create({
-    expenseAmount: Number(expenseAmount),
-    description,
-    category,
-    userId: user.id,
-  });
+  try {
+    const t = await sequelize.transaction();
+    const newExpense = await ExpenseModel.create(
+      {
+        expenseAmount: Number(expenseAmount),
+        description,
+        category,
+        userId: user.id,
+      },
+      {
+        transaction: t,
+      }
+    );
+    await t.commit();
+    return newExpense;
+  } catch (error) {
+    console.log(error);
+    await t.rollback();
+  }
 };
 
 module.exports = {

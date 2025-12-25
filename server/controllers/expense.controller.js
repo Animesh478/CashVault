@@ -8,8 +8,7 @@ const { updateTotalExpenses } = require("../services/user.service");
 const addExpense = async function (req, res) {
   const { expenseAmount, description, category } = req.body;
   const user = req.user;
-  console.log("inside expense=", user);
-  console.log(category);
+
   try {
     await updateTotalExpenses(expenseAmount, user.id); //update the total expenses for a user
     //? determine the category using ai
