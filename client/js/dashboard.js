@@ -50,6 +50,7 @@ const submitExpenseForm = async function (e) {
   const category = formData.get("category");
 
   const expenseObj = { expenseAmount, description, category };
+  form.reset();
 
   await axios.post("http://localhost:8000/expense/addExpense", expenseObj, {
     withCredentials: true,

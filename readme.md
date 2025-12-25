@@ -22,6 +22,12 @@
 - Rank the users
 - Highlight the current user
 
+# Implementing AI
+
+- generate google ai api key
+- user adds expense, selects 'other' in category
+- ai will read the expense description and determine the category
+
 # To-do
 
 - When the user opens the website he will be first redirected to the login page
