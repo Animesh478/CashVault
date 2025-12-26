@@ -29,7 +29,30 @@ const createUserExpense = async function (
       }
     );
     await t.commit();
-    return newExpense;
+    console.log("expense=", newExpense.toJSON());
+    return newExpense.toJSON();
+  } catch (error) {
+    console.log(error);
+    await t.rollback();
+  }
+};
+
+const deleteExpenseFromDB = async function (expenseId, userId) {
+  const t = await sequelize.transaction();
+  try {
+    const deletedExpense = await ExpenseModel.destroy(
+      {
+        where: {
+          id: expenseId,
+          userId,
+        },
+      },
+      {
+        transaction: t,
+      }
+    );
+    await t.commit();
+    return deletedExpense;
   } catch (error) {
     console.log(error);
     await t.rollback();
@@ -39,4 +62,5 @@ const createUserExpense = async function (
 module.exports = {
   getUserExpenses,
   createUserExpense,
+  deleteExpenseFromDB,
 };

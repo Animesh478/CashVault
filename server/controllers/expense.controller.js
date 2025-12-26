@@ -2,6 +2,7 @@ const { generateCategory } = require("../services/aiCategory.service");
 const {
   getUserExpenses,
   createUserExpense,
+  deleteExpenseFromDB,
 } = require("../services/expense.service");
 const { updateTotalExpenses } = require("../services/user.service");
 
@@ -43,7 +44,19 @@ const getAllExpenses = async function (req, res) {
   }
 };
 
+const deleteExpense = async function (req, res) {
+  const { id, userId } = req.body;
+  try {
+    const deletedExpense = await deleteExpenseFromDB(id, userId);
+    return res.status(201).json({ result: deletedExpense });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   addExpense,
   getAllExpenses,
+  deleteExpense,
 };
