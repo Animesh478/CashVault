@@ -22,23 +22,26 @@ const getAllExpenses = async function () {
 const displayAllExpenses = async function () {
   expenseList.innerHTML = "";
   const expenses = await getAllExpenses();
+  console.log("expenses=", expenses);
   expenses.forEach((expense) => {
     const template = document.querySelector(".transaction-template");
     const expenseCard = template.content.cloneNode(true);
+    const expenseCardEl = expenseCard.querySelector(".transaction");
 
     // adding values to the template
-    expenseCard.querySelector(".transaction-description").textContent =
+    expenseCardEl.querySelector(".transaction-description").textContent =
       expense.description;
-    expenseCard.querySelector(".transaction-category").textContent =
+    expenseCardEl.querySelector(".transaction-category").textContent =
       expense.category;
     const createdAt = new Date(expense.createdAt).toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
     });
-    expenseCard.querySelector(".transaction-date").textContent = createdAt;
-    expenseCard.querySelector(".transaction-amount").textContent =
+    expenseCardEl.querySelector(".transaction-date").textContent = createdAt;
+    expenseCardEl.querySelector(".transaction-amount").textContent =
       expense.expenseAmount;
+    expenseCardEl.dataset.expenseId = expense.id;
 
-    expenseList.appendChild(expenseCard);
+    expenseList.appendChild(expenseCardEl);
   });
 };
 
@@ -60,7 +63,21 @@ const submitExpenseForm = async function (e) {
 };
 
 const deleteExpense = async function (e) {
-  console.log(e.currentTarget);
+  const deleteBtn = e.target.closest(".delete-btn");
+  if (!deleteBtn) return;
+  const expenseEl = deleteBtn.closest(".transaction");
+  const expenseId = expenseEl.dataset.expenseId;
+  try {
+    await axios.delete(
+      `http://localhost:8000/expense/deleteExpense/${expenseId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    await displayAllExpenses();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 form.addEventListener("submit", submitExpenseForm);

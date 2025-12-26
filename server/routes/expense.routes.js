@@ -13,7 +13,7 @@ expenseRouter
   .route("/allExpenses")
   .get(authenticateUserMiddleware, getAllExpenses);
 expenseRouter
-  .route("/deleteExpense")
+  .route("/deleteExpense/:expenseId")
   .delete(authenticateUserMiddleware, deleteExpense);
 
 module.exports = expenseRouter;

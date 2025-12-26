@@ -36,6 +36,8 @@
 - Validate phone number from backend
 - Payment status verification using webhook
 - Edit and Delete button functionality
+- how to check when token validity expires
+- how to redirect user directly to login page when token expires
 
 # Colors
 

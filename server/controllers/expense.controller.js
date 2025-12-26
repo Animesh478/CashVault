@@ -36,6 +36,7 @@ const addExpense = async function (req, res) {
 
 const getAllExpenses = async function (req, res) {
   const user = req.user;
+  console.log("all expenses=", user);
   try {
     const result = await getUserExpenses(user.id);
     res.status(200).json(result);
@@ -45,9 +46,17 @@ const getAllExpenses = async function (req, res) {
 };
 
 const deleteExpense = async function (req, res) {
-  const { id, userId } = req.body;
+  // const { id, userId } = req.body;
+  const { expenseId } = req.params;
+  const user = req.user;
+
+  console.log("user=", req.user);
+  console.log("expense id=", expenseId);
+  const userId = user.id;
+  // get userId from req.user
+  // expenseid = req.params
   try {
-    const deletedExpense = await deleteExpenseFromDB(id, userId);
+    const deletedExpense = await deleteExpenseFromDB(expenseId, userId);
     return res.status(201).json({ result: deletedExpense });
   } catch (error) {
     console.log(error);
