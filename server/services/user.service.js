@@ -1,4 +1,5 @@
 const { UserModel, sequelize } = require("../models/index");
+// const { createHashPassword } = require("./userAuth.service");
 
 const addUser = async function ({ name, email, password, phoneNumber }) {
   try {
@@ -22,6 +23,7 @@ const getUserByEmail = async function (email) {
     });
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 

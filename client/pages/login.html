@@ -44,7 +44,10 @@
               />
               <label for="password">Password</label>
             </div>
-            <button type="submit">Login</button>
+            <button type="button" class="forgot_password">
+              Forgot password?
+            </button>
+            <button type="submit" class="login_btn">Login</button>
           </form>
           <div class="sign-up-redirect">
             <p>Don't have an account?</p>
@@ -54,6 +57,18 @@
         <div class="section-login--right">
           <img src="../assets/images/login.jpg" alt="" />
         </div>
+      </div>
+      <div class="overlay hidden"></div>
+      <div class="forgot_password_section hidden">
+        <form class="forgot_password_form">
+          <label for="registerd_email">Enter your Registered Email:</label>
+          <input
+            type="email"
+            id="registerd_email"
+            class="forgot_password_email"
+          />
+          <button class="reset_password_btn">Reset Password</button>
+        </form>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>

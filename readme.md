@@ -28,6 +28,19 @@
 - user adds expense, selects 'other' in category
 - ai will read the expense description and determine the category
 
+# Forgot Password
+
+- use SendInBlue mailing service
+- display a form where the user can insert his registered email
+- create table to store all the requests for forgot password
+- store a unique id, the user id and a isActive field to check whether the reset password link has been used before or not
+- create the reset password link using the unique id for each request
+- reset password link is sent to the email the user entered
+- when user clicks link, it opens a page that immediately calls a backend api
+- the backend api checks whether the reset link is valid or not
+- if the link is valid, show the reset password form else show error
+- when the user submits the reset password form another backend api is called to change the password in the database.
+
 # To-do
 
 - When the user opens the website he will be first redirected to the login page

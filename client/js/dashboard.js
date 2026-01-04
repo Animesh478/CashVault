@@ -80,13 +80,13 @@ const deleteExpense = async function (e) {
   }
 };
 
-form.addEventListener("submit", submitExpenseForm);
-
-expenseList.addEventListener("click", deleteExpense);
-
 const init = async function () {
   await displayAllExpenses();
   await getUserDetails();
 };
+
+form.addEventListener("submit", submitExpenseForm);
+expenseList.addEventListener("click", deleteExpense);
+
 
 init();
