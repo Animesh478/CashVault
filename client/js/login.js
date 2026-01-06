@@ -39,6 +39,7 @@ const showForgotPasswordForm = function () {
   overlay.classList.remove("hidden");
   forgotPasswordSection.classList.remove("hidden");
 };
+
 const hideForgotPasswordForm = function () {
   overlay.classList.add("hidden");
   forgotPasswordSection.classList.add("hidden");

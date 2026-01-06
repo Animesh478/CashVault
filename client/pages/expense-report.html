@@ -31,7 +31,33 @@
               <td>Food</td>
               <td>200.00</td>
             </tr>
+            <tr class="daily_total">
+              <td colspan="3"></td>
+              <td>200.00</td>
+            </tr>
+            <tr class="monthly_total">
+              <td colspan="3"></td>
+              <td>200.00</td>
+            </tr>
           </tbody>
+          <template class="expense_row_template">
+            <tr>
+              <td class="date"></td>
+              <td class="desc"></td>
+              <td class="category"></td>
+              <td class="exp_amt"></td>
+            </tr>
+          </template>
+          <template class="daily_total_template">
+            <tr>
+              <td colspan="3"></td>
+              <td class="daily_total_amount"></td>
+            </tr>
+          </template>
+          <template class="monthly_total_template">
+            <td colspan="3"></td>
+            <td class="monthly_total_amount"></td>
+          </template>
         </table>
       </div>
       <div class="yearly_report_title">Yearly Report</div>
@@ -43,6 +69,16 @@
               <th>Total Expense</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <td class="month">January</td>
+              <td class="month_total">200.00</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="yearly_total">200.00</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <button class="generate_pdf_btn">Generate PDF</button>

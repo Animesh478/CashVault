@@ -1,0 +1,128 @@
+:root {
+  --primary-teal: #20373f;
+  --secondary-teal: #274c55;
+  --box-shadow-color: #29756f;
+  --form-background: ##f3f7ff;
+  --placeholder-color: #a0aec0;
+  --font-color: #fff;
+}
+
+/* ========== Start Section ========== */
+.container_report {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.title_report {
+  font-size: 2.5rem;
+  color: var(--box-shadow-color);
+}
+
+.current_date_time {
+  align-self: flex-start;
+  font-size: 1.5rem;
+}
+
+.current_year {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.current_month {
+  font-size: 2rem;
+  font-weight: 600;
+}
+/* ========== End Section ========== */
+
+/* ========== Start monthly report table Section ========== */
+.monthly_report_table {
+  width: inherit;
+  display: flex;
+  justify-content: center;
+}
+.monthly_table {
+  border-collapse: collapse;
+  font-size: 1.5rem;
+  width: 80%;
+}
+
+.monthly_table thead {
+  background-color: var(--box-shadow-color);
+  color: var(--font-color);
+}
+
+.monthly_table thead tr th {
+  border: 1px solid black;
+  padding: 1rem 0rem;
+}
+
+.monthly_table tbody tr td {
+  border: 1px solid black;
+  text-align: center;
+}
+/* ========== End monthly report table Section ========== */
+
+/* ========== Start yearly report Section ========== */
+.yearly_report_title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 3rem;
+}
+
+.yearly_report_table {
+  width: inherit;
+  display: flex;
+  justify-content: center;
+}
+
+.yearly_table {
+  border-collapse: collapse;
+  width: 40%;
+  font-size: 1.5rem;
+}
+
+.yearly_report_table thead {
+  background-color: var(--box-shadow-color);
+  color: var(--font-color);
+}
+
+.yearly_report_table thead tr th {
+  padding: 1rem 2rem;
+  border: 1px solid black;
+}
+
+.yearly_report_table tbody tr td {
+  border: 1px solid black;
+  text-align: center;
+}
+/* ========== End yearly report Section ========== */
+
+/* ========== Start generate pdf button Section ========== */
+
+.generate_pdf_btn {
+  margin-top: 10rem;
+  border: none;
+  outline: none;
+  background-color: var(--primary-teal);
+  color: var(--font-color);
+  padding: 2rem 4rem;
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  width: 15%;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+
+.generate_pdf_btn:hover {
+  background-color: var(--box-shadow-color);
+}
+/* ========== End generate pdf button Section ========== */

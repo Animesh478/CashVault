@@ -48,8 +48,6 @@ const updateTotalExpenses = async function (expenseAmount, userId) {
         where: {
           id: userId,
         },
-      },
-      {
         transaction: t,
       }
     );
@@ -57,6 +55,7 @@ const updateTotalExpenses = async function (expenseAmount, userId) {
   } catch (error) {
     console.log(error);
     await t.rollback();
+    throw error;
   }
 };
 
