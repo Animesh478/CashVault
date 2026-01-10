@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { ExpenseModel, sequelize } = require("../models/index");
 
 const getUserExpenses = async function (userId) {
@@ -9,14 +10,32 @@ const getUserExpenses = async function (userId) {
   return result;
 };
 
+const getCurrentYearExpenses = async function (userId) {
+  const currentYear = new Date().getFullYear();
+  try {
+    const result = await ExpenseModel.findAll({
+      where: {
+        userId,
+        createdAt: {
+          [Op.gte]: new Date(currentYear, 0, 1),
+          [Op.lt]: new Date(currentYear + 1, 0, 1),
+        },
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const createUserExpense = async function (
   expenseAmount,
   description,
   category,
   user
 ) {
+  const t = await sequelize.transaction();
   try {
-    const t = await sequelize.transaction();
     const newExpense = await ExpenseModel.create(
       {
         expenseAmount: Number(expenseAmount),
@@ -34,12 +53,14 @@ const createUserExpense = async function (
   } catch (error) {
     console.log(error);
     await t.rollback();
+    throw error;
   }
 };
 
 const deleteExpenseFromDB = async function (expenseId, userId) {
-  const t = await sequelize.transaction();
+  let t;
   try {
+    t = await sequelize.transaction();
     const deletedExpense = await ExpenseModel.destroy(
       {
         where: {
@@ -63,4 +84,5 @@ module.exports = {
   getUserExpenses,
   createUserExpense,
   deleteExpenseFromDB,
+  getCurrentYearExpenses,
 };

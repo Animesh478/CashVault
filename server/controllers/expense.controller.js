@@ -3,6 +3,7 @@ const {
   getUserExpenses,
   createUserExpense,
   deleteExpenseFromDB,
+  getCurrentYearExpenses,
 } = require("../services/expense.service");
 const { updateTotalExpenses } = require("../services/user.service");
 
@@ -12,7 +13,7 @@ const addExpense = async function (req, res) {
 
   try {
     await updateTotalExpenses(expenseAmount, user.id); //update the total expenses for a user
-    //? determine the category using ai
+    // //? determine the category using ai
     let generatedCategory;
     if (category === "other") {
       generatedCategory = await generateCategory(description);
@@ -36,12 +37,14 @@ const addExpense = async function (req, res) {
 
 const getAllExpenses = async function (req, res) {
   const user = req.user;
-  console.log("all expenses=", user);
+  // const year = req.query();
+  console.log("user=", user);
   try {
     const result = await getUserExpenses(user.id);
     res.status(200).json(result);
   } catch (error) {
     console.log(error);
+    res.status(400).json(error);
   }
 };
 
@@ -64,8 +67,21 @@ const deleteExpense = async function (req, res) {
   }
 };
 
+const fetchCurrentYearExpenses = async function (req, res) {
+  const user = req.user;
+  try {
+    const result = await getCurrentYearExpenses(user.id);
+    console.log("expense=", result);
+    res.status(200).json({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error });
+  }
+};
+
 module.exports = {
   addExpense,
   getAllExpenses,
   deleteExpense,
+  fetchCurrentYearExpenses,
 };

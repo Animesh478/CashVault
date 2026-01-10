@@ -8,7 +8,7 @@ const authenticateUserMiddleware = function (req, res, next) {
     const userPayload = verifyJWT(token);
     // console.log("user payload=", userPayload);
     req.user = userPayload;
-    // console.log("user: ", req.user);
+    console.log("user: ", req.user);
   }
   next();
 };

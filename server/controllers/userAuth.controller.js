@@ -34,12 +34,12 @@ const userLogin = async function (req, res) {
   const { email, password } = req.body;
   try {
     const user = await getUserByEmail(email); //returns a Sequelize Model instance
-    const userObj = user.toJSON(); // converts the instance into js object
-    console.log("user auth=", userObj);
+
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
     // if the user exists, verify the password
+    const userObj = user.toJSON(); // converts the instance into js object
     const result = await verifyPassword(user, password);
     if (result) {
       const token = createJWT(userObj);
@@ -55,10 +55,11 @@ const userLogin = async function (req, res) {
         .status(200)
         .json({ message: "Login successful", token, redirectURL });
     } else {
-      return res.status(401).json({ error: "User not authorized" });
+      return res.status(401).json({ error: "User not found" });
     }
   } catch (error) {
     console.log(error);
+    res.status(400).json({ error });
   }
 };
 

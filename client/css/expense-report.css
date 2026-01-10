@@ -2,6 +2,8 @@
   --primary-teal: #20373f;
   --secondary-teal: #274c55;
   --box-shadow-color: #29756f;
+  --total-color: #09a6a6;
+  --footer-color: #96e1e1;
   --form-background: ##f3f7ff;
   --placeholder-color: #a0aec0;
   --font-color: #fff;
@@ -33,13 +35,21 @@
   font-weight: 600;
 }
 
+/* ========== End Section ========== */
+
+/* ========== Start monthly report table Section ========== */
+.monthly_report-section {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .current_month {
   font-size: 2rem;
   font-weight: 600;
 }
-/* ========== End Section ========== */
 
-/* ========== Start monthly report table Section ========== */
 .monthly_report_table {
   width: inherit;
   display: flex;
@@ -65,9 +75,32 @@
   border: 1px solid black;
   text-align: center;
 }
+
+.daily_total-row {
+  background-color: var(--total-color);
+  color: var(--font-color);
+}
+
+.monthly_table-foot .monthly_total-row {
+  background-color: var(--footer-color);
+}
+.monthly_table-foot tr td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.monthly_table-foot .monthly_total-row .monthly_total_amount {
+  font-weight: 600;
+}
 /* ========== End monthly report table Section ========== */
 
 /* ========== Start yearly report Section ========== */
+.yearly_report-section {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .yearly_report_title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -99,6 +132,19 @@
 .yearly_report_table tbody tr td {
   border: 1px solid black;
   text-align: center;
+}
+
+.yearly_table-foot {
+  background-color: var(--footer-color);
+}
+
+.yearly_table-foot .yearly_total-row td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.yearly_table-foot .yearly_total-row .yearly_total {
+  font-weight: 600;
 }
 /* ========== End yearly report Section ========== */
 

@@ -12,76 +12,81 @@
     <div class="container_report">
       <h1 class="title_report">Expense Report</h1>
       <div class="current_date_time">January 1</div>
-      <div class="current_year">2026</div>
-      <div class="current_month">January</div>
-      <div class="monthly_report_table">
-        <table class="monthly_table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Category</th>
-              <th>Expense</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>01-01-2026</td>
-              <td>Cake</td>
-              <td>Food</td>
-              <td>200.00</td>
-            </tr>
-            <tr class="daily_total">
-              <td colspan="3"></td>
-              <td>200.00</td>
-            </tr>
-            <tr class="monthly_total">
-              <td colspan="3"></td>
-              <td>200.00</td>
-            </tr>
-          </tbody>
-          <template class="expense_row_template">
-            <tr>
-              <td class="date"></td>
-              <td class="desc"></td>
-              <td class="category"></td>
-              <td class="exp_amt"></td>
-            </tr>
-          </template>
-          <template class="daily_total_template">
-            <tr>
-              <td colspan="3"></td>
-              <td class="daily_total_amount"></td>
-            </tr>
-          </template>
-          <template class="monthly_total_template">
-            <td colspan="3"></td>
-            <td class="monthly_total_amount"></td>
-          </template>
-        </table>
-      </div>
-      <div class="yearly_report_title">Yearly Report</div>
-      <div class="yearly_report_table">
-        <table class="yearly_table">
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th>Total Expense</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="month">January</td>
-              <td class="month_total">200.00</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td class="yearly_total">200.00</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <section class="monthly_report-section">
+        <div class="current_month">January 2026</div>
+        <div class="monthly_report_table">
+          <table class="monthly_table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Expense</th>
+              </tr>
+            </thead>
+            <tbody class="monthly_table-body"></tbody>
+            <tfoot class="monthly_table-foot"></tfoot>
+            <!-- Expense Row Template -->
+            <template class="expense_row_template">
+              <tr class="expense_row">
+                <td class="date"></td>
+                <td class="desc"></td>
+                <td class="category"></td>
+                <td class="exp_amt"></td>
+              </tr>
+            </template>
+
+            <!-- Daily Total Template -->
+            <template class="daily_total_template">
+              <tr class="daily_total-row">
+                <td colspan="3">Daily Total</td>
+                <td class="daily_total_amount"></td>
+              </tr>
+            </template>
+
+            <!-- Monthly Total Template -->
+            <template class="monthly_total_template">
+              <tr class="monthly_total-row">
+                <td colspan="3">Total Expenses</td>
+                <td class="monthly_total_amount"></td>
+              </tr>
+            </template>
+          </table>
+        </div>
+      </section>
+
+      <section class="yearly_report-section">
+        <div class="yearly_report_title">Yearly Report</div>
+        <div class="current_year">2026</div>
+        <div class="yearly_report_table">
+          <table class="yearly_table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Total Expense</th>
+              </tr>
+            </thead>
+            <tbody class="yearly_table-body"></tbody>
+            <tfoot class="yearly_table-foot"></tfoot>
+            <template class="monthly_expense_template">
+              <tr>
+                <td class="month"></td>
+                <td class="month_total"></td>
+              </tr>
+            </template>
+            <template class="yearly_total_template">
+              <tr class="yearly_total-row">
+                <td>Total Expense Amount</td>
+                <td class="yearly_total"></td>
+              </tr>
+            </template>
+          </table>
+        </div>
+      </section>
+
       <button class="generate_pdf_btn">Generate PDF</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="../js/generateReport.js"></script>
   </body>
 </html>

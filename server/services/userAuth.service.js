@@ -19,6 +19,7 @@ const verifyPassword = async function (user, password) {
     return result;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
