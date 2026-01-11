@@ -43,12 +43,13 @@ const userLogin = async function (req, res) {
     const result = await verifyPassword(user, password);
     if (result) {
       const token = createJWT(userObj);
-      // console.log("token:", token);
+      console.log("token:", token);
       res.cookie("access_token", token, {
         httpOnly: true,
         secure: false,
         sameSite: "lax",
         path: "/",
+        maxAge: 24 * 60 * 60 * 1000,
       });
       const redirectURL = "http://localhost:5500/client/pages/dashboard.html";
       return res

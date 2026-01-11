@@ -2,16 +2,30 @@ const monthlyTable = document.querySelector(".monthly_table-body");
 const monthlyExpenseFoot = document.querySelector(".monthly_table-foot");
 const yearlyTableBody = document.querySelector(".yearly_table-body");
 const yearlyTableFoot = document.querySelector(".yearly_table-foot");
+const currentDateTimeEl = document.querySelector(".current_date_time");
+const currentMonthEl = document.querySelector(".current_month");
+const currentYearEl = document.querySelector(".current_year");
+
+const currentDate = new Date().toLocaleString("en-IN", {
+  dateStyle: "full",
+  timeStyle: "medium",
+});
+
+const currentMonth = new Date().toLocaleDateString("en-IN", {
+  month: "long",
+});
+
+const currentYear = new Date().getFullYear();
+
+currentDateTimeEl.textContent = currentDate;
+currentMonthEl.textContent = `${currentMonth}, ${currentYear}`;
+currentYearEl.textContent = currentYear;
 
 const calculateMonthly = function (groupedExpenses) {
   // todo - calculate monthly expense
   return Object.values(groupedExpenses).reduce((total, day) => {
     return total + day.dayTotal;
   }, 0);
-};
-
-const calculateYearly = function () {
-  // todo - calculate yearly expense
 };
 
 const getLocaleDate = function (utcDate) {
@@ -21,22 +35,21 @@ const getLocaleDate = function (utcDate) {
 const expensesGroupedByDate = function (expenses) {
   return expenses.reduce((acc, expense) => {
     const dateObj = new Date(expense.createdAt);
+    const currentMonth = new Date().getMonth();
 
-    // store the locale date and the utc date
-    const date = dateObj.toISOString().split("T")[0];
-    const localeDate = getLocaleDate(expense.createdAt);
+    if (currentMonth === dateObj.getMonth()) {
+      const date = getLocaleDate(expense.createdAt);
 
-    if (!acc[date]) {
-      acc[date] = {
-        items: [],
-        dayTotal: 0,
-        localeDate,
-      };
+      if (!acc[date]) {
+        acc[date] = {
+          items: [],
+          dayTotal: 0,
+        };
+      }
+
+      acc[date].items.push(expense);
+      acc[date].dayTotal += expense.expenseAmount;
     }
-
-    acc[date].items.push(expense);
-    acc[date].dayTotal += expense.expenseAmount;
-
     return acc;
   }, {});
 };
@@ -51,7 +64,7 @@ const sortGroupedExpenses = function (groupedExpenses) {
 const renderExpenses = function (expense, dailyExpense) {
   const expenseRowTemplate = document.querySelector(".expense_row_template");
   const expenseRow = expenseRowTemplate.content.cloneNode(true);
-  expenseRow.querySelector(".date").textContent = dailyExpense.localeDate;
+  expenseRow.querySelector(".date").textContent = dailyExpense.date;
   expenseRow.querySelector(".desc").textContent = expense.description;
   expenseRow.querySelector(".category").textContent = expense.category;
   expenseRow.querySelector(
