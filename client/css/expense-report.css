@@ -172,3 +172,37 @@
   background-color: var(--box-shadow-color);
 }
 /* ========== End generate pdf button Section ========== */
+
+/* ========== Start print pdf Section ========== */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    margin: 0;
+    padding: 2mm;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  .container_report {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+  }
+}
+/* ========== End print pdf Section ========== */

@@ -5,6 +5,7 @@ const yearlyTableFoot = document.querySelector(".yearly_table-foot");
 const currentDateTimeEl = document.querySelector(".current_date_time");
 const currentMonthEl = document.querySelector(".current_month");
 const currentYearEl = document.querySelector(".current_year");
+const generatePdfBtn = document.querySelector(".generate_pdf_btn");
 
 const currentDate = new Date().toLocaleString("en-IN", {
   dateStyle: "full",
@@ -176,4 +177,10 @@ const getAllExpenses = async function () {
   }
 };
 
+const downloadAsPdf = function () {
+  window.print();
+};
+
 document.addEventListener("DOMContentLoaded", getAllExpenses);
+
+generatePdfBtn.addEventListener("click", downloadAsPdf);
