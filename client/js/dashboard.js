@@ -37,8 +37,9 @@ const displayAllExpenses = async function () {
       timeZone: "Asia/Kolkata",
     });
     expenseCardEl.querySelector(".transaction-date").textContent = createdAt;
-    expenseCardEl.querySelector(".transaction-amount").textContent =
-      expense.expenseAmount;
+    expenseCardEl.querySelector(
+      ".transaction-amount"
+    ).textContent = `₹ ${expense.expenseAmount}`;
     expenseCardEl.dataset.expenseId = expense.id;
 
     expenseList.appendChild(expenseCardEl);
@@ -87,6 +88,5 @@ const init = async function () {
 
 form.addEventListener("submit", submitExpenseForm);
 expenseList.addEventListener("click", deleteExpense);
-
 
 init();

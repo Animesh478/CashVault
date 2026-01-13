@@ -41,6 +41,10 @@
 - if the link is valid, show the reset password form else show error
 - when the user submits the reset password form another backend api is called to change the password in the database.
 
+# Pagination
+
+-
+
 # To-do
 
 - When the user opens the website he will be first redirected to the login page
