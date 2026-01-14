@@ -42,7 +42,7 @@ const displayAllExpenses = async function () {
   expenseList.innerHTML = "";
 
   const pageVal = Number(sessionStorage.getItem("page")) || 1;
-  const limitVal = Number(sessionStorage.getItem("limit")) || limit;
+  const limitVal = Number(localStorage.getItem("limit")) || limit;
   limitEl.value = limitVal; //the value in select-option persists
 
   // console.log(pageVal, limitVal);
@@ -95,7 +95,7 @@ const showPrevPageExpenses = async function () {
   const limit = Number(limitEl.value);
 
   sessionStorage.setItem("page", currentPage - 1);
-  sessionStorage.setItem("limit", limit);
+  localStorage.setItem("limit", limit);
 
   await displayAllExpenses();
 };
@@ -104,8 +104,8 @@ const showNextPageExpenses = async function () {
   const currentPage = Number(currentPageEl.textContent);
   const limit = Number(limitEl.value);
 
-  sessionStorage.setItem("page", String(currentPage + 1));
-  sessionStorage.setItem("limit", String(limit));
+  sessionStorage.setItem("page", currentPage + 1);
+  localStorage.setItem("limit", limit);
 
   await displayAllExpenses();
 };
@@ -116,7 +116,7 @@ const showExpensesForUpdatedLimit = async function () {
   const limit = limitEl.value;
 
   sessionStorage.setItem("page", page);
-  sessionStorage.setItem("limit", limit);
+  localStorage.setItem("limit", limit);
 
   await displayAllExpenses();
 };
