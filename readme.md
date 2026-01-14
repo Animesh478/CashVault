@@ -43,7 +43,43 @@
 
 # Pagination
 
--
+## Overview
+
+- this app uses server side pagination to efficiently handle large datasets and improve performance
+
+## Strategy
+
+- backend handles the pagination
+- frontend controls pagination with query parameters
+- data is fetched page-wise with a limit per page
+
+## API contract
+
+**Request Parameters**
+
+- page number: current page number (1 based)
+- limit : number of expenses per page. it is dynamic (5,10,15,20)
+
+**Response Structure**
+
+- result: an array of expenses for the current page
+- hasNextPage : boolean value to indicate whether a next page exists or not
+
+## Frontend behaviour
+
+- the pagination section is hidden when there are no expenses
+- pagination controls are disabled when there are no next and prev pages
+- data is refetched on page change
+
+## Backend functionality
+
+- The backend sanitizes incoming pagination parameters to ensure data consistency
+- uses page and limit to fetch only the requested data from the database
+- it is fetching one expense data more than the limit so as to check the whether any more page exists or not
+- if the number of expenses fetched is more than the limit then another page of expenses exist
+- using hasNextPage flag to notify the frontend whether next page exists or not
+- page numbers less than 1 are clamped to 1
+- invalid or missing page values default to 1
 
 # To-do
 
@@ -52,7 +88,7 @@
 - logout button
 - Validate phone number from backend
 - Payment status verification using webhook
-- Edit and Delete button functionality
+- Edit button functionality
 - how to check when token validity expires
 - how to redirect user directly to login page when token expires
 - check forgot password code
