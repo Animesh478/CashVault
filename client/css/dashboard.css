@@ -97,7 +97,7 @@ body {
   justify-content: center;
   align-items: center;
   background: var(--form-background);
-  box-shadow: #29756f 0px 5px 15px;
+  box-shadow: var(--box-shadow-color) 0px 0px 15px;
   border-radius: 1rem;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
@@ -192,7 +192,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   height: 35rem;
-  box-shadow: #29756f 0px 5px 15px;
+  box-shadow: #29756f 0px 0px 15px;
   color: #fff;
   font-weight: 500;
   overflow-y: auto;
@@ -208,6 +208,28 @@ body {
 
 .transaction-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+.transaction-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.transaction-header label {
+  font-size: 1.3rem;
+}
+
+.transaction-header #limit {
+  outline: none;
+  background-color: var(--box-shadow-color);
+  color: var(--font-color);
+  font-family: "Poppins", sans-serif;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
 }
 
 .transactions-list {
@@ -284,6 +306,66 @@ body {
   }
 }
 /* ========== End Transaction Details Section ========== */
+
+/* ========== Start pagination Section ========== */
+.pages_container {
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 2rem;
+  justify-self: flex-end;
+}
+.page-btn {
+  border: 1px solid var(--font-color);
+  background-color: var(--primary-teal);
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--font-color);
+  cursor: pointer;
+  transition: 0.2s all ease;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transition: 0.2s all ease;
+  -moz-transition: 0.2s all ease;
+  -ms-transition: 0.2s all ease;
+  -o-transition: 0.2s all ease;
+}
+.page-btn i::before {
+  height: inherit;
+  width: inherit;
+}
+
+.page-btn:active {
+  transform: scale(90%);
+  -webkit-transform: scale(90%);
+  -moz-transform: scale(90%);
+  -ms-transform: scale(90%);
+  -o-transform: scale(90%);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.curr-page {
+  border: none;
+  height: 3rem;
+  width: 3rem;
+  background-color: var(--primary-teal);
+  color: var(--font-color);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+}
+/* ========== End pagination Section ========== */
 
 /* ========== Start Premium Section ========== */
 /* .premium_feature {

@@ -37,11 +37,30 @@ const addExpense = async function (req, res) {
 
 const getAllExpenses = async function (req, res) {
   const user = req.user;
-  // const year = req.query();
-  console.log("user=", user);
+  const { page, limit } = req.query;
+  console.log("page=", page);
+  let hasNextPage = false;
+  const options = {
+    user: {
+      userId: user.id,
+    },
+    pagination: {
+      page,
+      limit,
+    },
+    sorting: {
+      order: "DESC",
+    },
+  };
+
   try {
-    const result = await getUserExpenses(user.id);
-    res.status(200).json(result);
+    const expenses = await getUserExpenses(options);
+    if (expenses.length > limit) {
+      hasNextPage = true;
+    }
+    // console.log("result-", result.length);
+    const result = expenses.slice(0, limit);
+    res.status(200).json({ result, hasNextPage });
   } catch (error) {
     console.log(error);
     res.status(400).json(error);
@@ -49,15 +68,10 @@ const getAllExpenses = async function (req, res) {
 };
 
 const deleteExpense = async function (req, res) {
-  // const { id, userId } = req.body;
   const { expenseId } = req.params;
   const user = req.user;
-
-  console.log("user=", req.user);
-  console.log("expense id=", expenseId);
   const userId = user.id;
-  // get userId from req.user
-  // expenseid = req.params
+
   try {
     const deletedExpense = await deleteExpenseFromDB(expenseId, userId);
     return res.status(201).json({ result: deletedExpense });
@@ -69,8 +83,17 @@ const deleteExpense = async function (req, res) {
 
 const fetchCurrentYearExpenses = async function (req, res) {
   const user = req.user;
+  const options = {
+    user: {
+      userId: user.id,
+    },
+    date: {
+      currentYear: new Date().getFullYear(),
+    },
+  };
   try {
     const result = await getCurrentYearExpenses(user.id);
+    // const result = await getUserExpenses(options);
     console.log("expense=", result);
     res.status(200).json({ result });
   } catch (error) {

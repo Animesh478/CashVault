@@ -83,7 +83,18 @@
 
         <!-- ========== Start Transaction Section ========== -->
         <div class="transaction-container">
-          <h1>Recent Transactions</h1>
+          <div class="transaction-header">
+            <h1>Recent Transactions</h1>
+            <div class="limit-section">
+              <label for="limit"> Expenses per page:</label>
+              <select name="expenses-limit" id="limit">
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+          </div>
           <div class="transactions-list"></div>
           <template class="transaction-template">
             <div class="transaction">
@@ -108,6 +119,16 @@
             </div>
           </template>
           <!-- todo: buttons for pagination -->
+          <div class="pages_container">
+            <button class="prev-btn page-btn">
+              <!-- <i class="fa-solid fa-circle-chevron-left"></i> -->
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="curr-page">1</div>
+            <button class="next-btn page-btn">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

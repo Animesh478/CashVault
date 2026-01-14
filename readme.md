@@ -70,6 +70,8 @@
 - the pagination section is hidden when there are no expenses
 - pagination controls are disabled when there are no next and prev pages
 - data is refetched on page change
+- the user can decide how many expenses to display per page
+- the value that the user decides is stored in the session storage (as i want it to persist across refreshes but not when the tab/browser is closed)
 
 ## Backend functionality
 
