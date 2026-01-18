@@ -1,19 +1,27 @@
 module.exports = (sequelize, DataTypes) => {
-  const forgotPassword = sequelize.define("ForgotPassword", {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-      allowNull: false,
+  const forgotPassword = sequelize.define(
+    "ForgotPassword",
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: "user_id",
+      },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        field: "is_active",
+      },
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    {
+      tableName: "password_reset_requests",
     },
-    isActive: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-  });
+  );
   return forgotPassword;
 };

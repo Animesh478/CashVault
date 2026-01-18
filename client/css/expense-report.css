@@ -171,6 +171,10 @@
 .generate_pdf_btn:hover {
   background-color: var(--box-shadow-color);
 }
+
+.hidden {
+  display: none;
+}
 /* ========== End generate pdf button Section ========== */
 
 /* ========== Start print pdf Section ========== */

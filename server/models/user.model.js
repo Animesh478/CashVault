@@ -27,10 +27,12 @@ module.exports = (sequelize, DataTypes) => {
     isPremium: {
       type: DataTypes.STRING,
       defaultValue: "false",
+      field: "is_premium",
     },
     totalExpenses: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
+      field: "total_expenses",
     },
   });
 

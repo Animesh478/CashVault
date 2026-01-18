@@ -18,7 +18,7 @@ app.use(
     // origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
     origin: ["http://localhost:5500"],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(cookieParser());
@@ -33,14 +33,6 @@ app.use("/expense", expenseRouter);
 app.use("/payment", paymentRouter);
 app.use("/premium", premiumRouter);
 
-sequelize
-  .sync()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log("Database Synced");
-      console.log("Server started");
-    });
-  })
-  .catch((error) => {
-    console.log("DB sync error: ", error);
-  });
+app.listen(PORT, () => {
+  console.log("Server started");
+});
