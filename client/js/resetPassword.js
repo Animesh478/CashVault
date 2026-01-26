@@ -5,7 +5,7 @@ const newPasswordEl = resetPasswordForm.querySelector(".new_password");
 // check to see if both password and confirm password are same
 confirmPasswordEl.addEventListener("keyup", () => {
   const confirmNewPassword = resetPasswordForm.querySelector(
-    ".confirm_new_password"
+    ".confirm_new_password",
   ).value;
   const newPassword = newPasswordEl.value;
   const errorMsgEl = document.querySelector(".error_message");
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const result = await axios.get(
-      `http://localhost:8000/user-auth/resetPassword/${id}`
+      `http://localhost:8000/user-auth/resetPassword/${id}`,
     );
     console.log("result-", result);
     // if the link is active show the form to reset the password
@@ -53,7 +53,7 @@ resetPasswordForm.addEventListener("submit", async (e) => {
   try {
     const response = await axios.post(
       `http://localhost:8000/user-auth/change-password`,
-      dataObj
+      dataObj,
     );
     if (response.data.redirectURL) {
       window.location.href = response.data.redirectURL;

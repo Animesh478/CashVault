@@ -40,6 +40,7 @@ const getCurrentYearExpenses = async function (userId) {
     return result;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -47,7 +48,7 @@ const createUserExpense = async function (
   expenseAmount,
   description,
   category,
-  user
+  user,
 ) {
   let t;
   try {
@@ -61,10 +62,10 @@ const createUserExpense = async function (
       },
       {
         transaction: t,
-      }
+      },
     );
     await t.commit();
-    console.log("expense=", newExpense.toJSON());
+
     return newExpense.toJSON();
   } catch (error) {
     console.log(error);
@@ -86,7 +87,7 @@ const deleteExpenseFromDB = async function (expenseId, userId) {
       },
       {
         transaction: t,
-      }
+      },
     );
     await t.commit();
     return deletedExpense;

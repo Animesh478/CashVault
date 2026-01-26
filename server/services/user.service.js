@@ -1,5 +1,4 @@
 const { UserModel, sequelize } = require("../models/index");
-// const { createHashPassword } = require("./userAuth.service");
 
 const addUser = async function ({ name, email, password, phoneNumber }) {
   try {
@@ -11,6 +10,7 @@ const addUser = async function ({ name, email, password, phoneNumber }) {
     });
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -33,6 +33,7 @@ const getUserData = async function (email) {
     return user;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -49,7 +50,7 @@ const updateTotalExpenses = async function (expenseAmount, userId) {
           id: userId,
         },
         transaction: t,
-      }
+      },
     );
     await t.commit();
   } catch (error) {

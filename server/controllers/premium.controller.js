@@ -1,7 +1,8 @@
 const { getUserAndAggregateExpense } = require("../services/premium.service");
 const { getUserByEmail } = require("../services/user.service");
+const logger = require("../utils/logger");
 
-const showLeaderboard = async function (req, res) {
+const showLeaderboard = async function (req, res, next) {
   try {
     const result = await getUserAndAggregateExpense();
     const currentUser = await getUserByEmail(req.user.email);
@@ -18,8 +19,15 @@ const showLeaderboard = async function (req, res) {
       .status(200)
       .json({ success: true, rankedData, userId: currentUser.id });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ success: false, error });
+    logger.error("Error encountered while showing leaderboard", {
+      userId: user?.id,
+      body: req.body,
+      error: error.message,
+      stack: error.stack,
+    });
+
+    error.statusCode = 500;
+    next(error);
   }
 };
 

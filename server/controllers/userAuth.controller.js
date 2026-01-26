@@ -7,43 +7,52 @@ const {
   checkResetUrlValidity,
   updatePassword,
 } = require("../services/userAuth.service");
+const logger = require("../utils/logger");
 
-const userSignUp = async function (req, res) {
+const userSignUp = async function (req, res, next) {
   const { name, email, password, phoneNumber } = req.body;
   try {
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
-      return res.status(404).json({ error: "User already exists" });
+      return res.status(409).json({ message: "User already exists" });
     }
-  } catch (error) {
-    console.log(error);
-  }
 
-  const hashedPassword = await createHashPassword(password);
-  const user = await addUser({
-    name,
-    email,
-    password: hashedPassword,
-    phoneNumber,
-  });
-  const redirectURL = "http://localhost:5500/client/pages/login.html";
-  return res.json({ success: "User added successfully", user, redirectURL });
+    const hashedPassword = await createHashPassword(password);
+    const user = await addUser({
+      name,
+      email,
+      password: hashedPassword,
+      phoneNumber,
+    });
+    const redirectURL = "http://localhost:5500/client/pages/login.html";
+    return res
+      .status(201)
+      .json({ success: "User added successfully", user, redirectURL });
+  } catch (error) {
+    logger.error("User cannot be added", {
+      email,
+      error: error.message,
+      stack: error.stack,
+    });
+    error.statusCode = 500;
+    next(error);
+  }
 };
 
-const userLogin = async function (req, res) {
+const userLogin = async function (req, res, next) {
   const { email, password } = req.body;
   try {
     const user = await getUserByEmail(email); //returns a Sequelize Model instance
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
     // if the user exists, verify the password
     const userObj = user.toJSON(); // converts the instance into js object
-    const result = await verifyPassword(user, password);
+    const result = await verifyPassword(userObj, password);
     if (result) {
       const token = createJWT(userObj);
-      console.log("token:", token);
+
       res.cookie("access_token", token, {
         httpOnly: true,
         secure: false,
@@ -52,60 +61,75 @@ const userLogin = async function (req, res) {
         maxAge: 24 * 60 * 60 * 1000,
       });
       const redirectURL = "http://localhost:5500/client/pages/dashboard.html";
-      return res
-        .status(200)
-        .json({ message: "Login successful", token, redirectURL });
+      return res.status(200).json({ message: "Login successful", redirectURL });
     } else {
-      return res.status(401).json({ error: "User not found" });
+      logger.warn("Incorrect credentials", {
+        userId: user.id,
+      });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ error });
+    logger.error("Login failed", {
+      email,
+      error: error.message,
+      stack: error.stack,
+    });
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const forgotPassword = async function (req, res) {
+const forgotPassword = async function (req, res, next) {
+  const { email } = req.body;
   try {
-    const { email } = req.body;
-    console.log("email=", email);
     const result = await sendPasswordResetEmail(email);
 
     if (!result) {
-      return res
-        .status(400)
-        .json({ message: "User with the provided email doesnot exist" });
+      return res.status(400).json({
+        message: "If the email is registered, a reset link will be sent",
+      });
     }
 
     res.status(200).json({
       message: "Reset password link has been sent to your registered email",
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
+    logger.error("Forgot password failed", {
+      email,
       error: error.message,
+      stack: error.stack,
     });
+
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const resetPassword = async function (req, res) {
+const resetPassword = async function (req, res, next) {
   const { id } = req.params;
   try {
     const record = await checkResetUrlValidity(id);
 
     if (!(record && record.isActive)) {
       return res
-        .status(400)
+        .status(410)
         .json({ message: "Record doesnot exist or Reset link has expired" });
     }
-    const recordObj = record.toJSON();
-    res.status(200).json({ result: recordObj });
+
+    res.status(200).json({ message: "Reset link is valid" });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error });
+    logger.error("Could not reset password", {
+      resetId: id,
+      error: error.message,
+      stack: error.stack,
+    });
+
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const changePassword = async function (req, res) {
+const changePassword = async function (req, res, next) {
   try {
     const { urlId, newPassword } = req.body;
     await updatePassword(urlId, newPassword);
@@ -115,9 +139,28 @@ const changePassword = async function (req, res) {
       .status(200)
       .json({ success: "Password updated successfully", redirectURL });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ error });
+    logger.error("Could not update password", {
+      email,
+      error: error.message,
+      stack: error.stack,
+    });
+
+    error.statusCode = 500;
+    next(error);
   }
+};
+
+const userLogout = function (req, res) {
+  res.clearCookie("access_token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    path: "/",
+  });
+  const redirectURL = "http://localhost:5500/client/pages/login.html";
+  res
+    .status(200)
+    .json({ success: "You have been logged out successfully", redirectURL });
 };
 
 module.exports = {
@@ -126,4 +169,5 @@ module.exports = {
   forgotPassword,
   resetPassword,
   changePassword,
+  userLogout,
 };

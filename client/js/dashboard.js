@@ -7,6 +7,7 @@ const limit = Number(limitEl.value);
 const prevPageBtn = document.querySelector(".prev-btn");
 const nextPageBtn = document.querySelector(".next-btn");
 const paginationSection = document.querySelector(".pages_container");
+const logoutLink = document.querySelector(".logout-link");
 
 const getUserDetails = async function () {
   try {
@@ -29,7 +30,7 @@ const getAllExpenses = async function (page, limit) {
       `http://localhost:8000/expense/allExpenses?page=${page}&limit=${limit}`,
       {
         withCredentials: true,
-      }
+      },
     );
     console.log(result);
     return result.data;
@@ -69,9 +70,8 @@ const displayAllExpenses = async function () {
       timeZone: "Asia/Kolkata",
     });
     expenseCardEl.querySelector(".transaction-date").textContent = createdAt;
-    expenseCardEl.querySelector(
-      ".transaction-amount"
-    ).textContent = `₹ ${expense.expenseAmount}`;
+    expenseCardEl.querySelector(".transaction-amount").textContent =
+      `₹ ${expense.expenseAmount}`;
     expenseCardEl.dataset.expenseId = expense.id;
 
     expenseList.appendChild(expenseCardEl);
@@ -148,7 +148,7 @@ const deleteExpense = async function (e) {
       `http://localhost:8000/expense/deleteExpense/${expenseId}`,
       {
         withCredentials: true,
-      }
+      },
     );
     expenseEl.remove();
 
@@ -164,6 +164,25 @@ const deleteExpense = async function (e) {
   }
 };
 
+const logoutUser = async function (e) {
+  e.preventDefault();
+
+  try {
+    const result = await axios.post(
+      "http://localhost:8000/user-auth/logout",
+      {},
+      {
+        withCredentials: true,
+      },
+    );
+    const data = result.data;
+    console.log(data.redirectURL);
+    window.location.href = data.redirectURL;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const init = async function () {
   await displayAllExpenses();
   await getUserDetails();
@@ -174,5 +193,6 @@ expenseList.addEventListener("click", deleteExpense);
 prevPageBtn.addEventListener("click", showPrevPageExpenses);
 nextPageBtn.addEventListener("click", showNextPageExpenses);
 limitEl.addEventListener("change", showExpensesForUpdatedLimit);
+logoutLink.addEventListener("click", logoutUser);
 
 init();

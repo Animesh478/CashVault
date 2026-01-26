@@ -52,12 +52,12 @@ const sendPasswordResetEmail = async function (email) {
     const entryInstance = await ForgotPasswordModel.create({ userId: user.id });
     const entry = entryInstance.toJSON();
 
-    const resetLink = `http://127.0.0.1:5500/client/pages/reset-password.html?id=${entry.id}`;
+    const resetLink = `http://localhost:5500/client/pages/reset-password.html?id=${entry.id}`;
 
     let emailAPI = new TransactionalEmailsApi();
     emailAPI.setApiKey(
       TransactionalEmailsApiApiKeys.apiKey,
-      process.env.BREVO_API_KEY
+      process.env.BREVO_API_KEY,
     );
 
     const message = new SendSmtpEmail();
@@ -75,16 +75,18 @@ const sendPasswordResetEmail = async function (email) {
     return await emailAPI.sendTransacEmail(message);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
 const checkResetUrlValidity = async function (id) {
   try {
     const record = await getRequestRecord(id);
-    console.log("record=", record);
+
     return record;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -101,7 +103,7 @@ const updatePassword = async function (id, newPassword) {
         where: {
           id: userId,
         },
-      }
+      },
     );
 
     // the same link can't be used again
@@ -113,7 +115,7 @@ const updatePassword = async function (id, newPassword) {
         where: {
           id: record.id,
         },
-      }
+      },
     );
   } catch (error) {
     console.log(error);

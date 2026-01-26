@@ -12,6 +12,7 @@ const getUserAndAggregateExpense = async function () {
     return result;
   } catch (error) {
     console.log(error);
+    throw error
   }
 };
 

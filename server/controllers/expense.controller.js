@@ -6,8 +6,9 @@ const {
   getCurrentYearExpenses,
 } = require("../services/expense.service");
 const { updateTotalExpenses } = require("../services/user.service");
+const logger = require("../utils/logger");
 
-const addExpense = async function (req, res) {
+const addExpense = async function (req, res, next) {
   const { expenseAmount, description, category } = req.body;
   const user = req.user;
 
@@ -25,20 +26,27 @@ const addExpense = async function (req, res) {
       expenseAmount,
       description,
       generatedCategory,
-      user
+      user,
     );
 
     return res.status(201).json({ message: "Expense added", newExpense });
   } catch (error) {
-    console.log(error);
-    return res.status(404).json({ error });
+    logger.error("Failed to add expense", {
+      userId: user?.id,
+      body: req.body,
+      error: error.message,
+      stack: error.stack,
+    });
+
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const getAllExpenses = async function (req, res) {
+const getAllExpenses = async function (req, res, next) {
   const user = req.user;
   const { page, limit } = req.query;
-  console.log("page=", page);
+
   let hasNextPage = false;
   const options = {
     user: {
@@ -58,16 +66,23 @@ const getAllExpenses = async function (req, res) {
     if (expenses.length > limit) {
       hasNextPage = true;
     }
-    // console.log("result-", result.length);
+
     const result = expenses.slice(0, limit);
     res.status(200).json({ result, hasNextPage });
   } catch (error) {
-    console.log(error);
-    res.status(400).json(error);
+    logger.error("Failed to fetch expenses", {
+      userId: user?.id,
+      body: req.body,
+      error: error.message,
+      stack: error.stack,
+    });
+
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const deleteExpense = async function (req, res) {
+const deleteExpense = async function (req, res, next) {
   const { expenseId } = req.params;
   const user = req.user;
   const userId = user.id;
@@ -76,29 +91,43 @@ const deleteExpense = async function (req, res) {
     const deletedExpense = await deleteExpenseFromDB(expenseId, userId);
     return res.status(201).json({ result: deletedExpense });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error });
+    logger.error("Failed to delete expense", {
+      userId: user?.id,
+      body: req.body,
+      error: error.message,
+      stack: error.stack,
+    });
+
+    error.statusCode = 500;
+    next(error);
   }
 };
 
-const fetchCurrentYearExpenses = async function (req, res) {
+const fetchCurrentYearExpenses = async function (req, res, next) {
   const user = req.user;
-  const options = {
-    user: {
-      userId: user.id,
-    },
-    date: {
-      currentYear: new Date().getFullYear(),
-    },
-  };
+  // const options = {
+  //   user: {
+  //     userId: user.id,
+  //   },
+  //   date: {
+  //     currentYear: new Date().getFullYear(),
+  //   },
+  // };
   try {
     const result = await getCurrentYearExpenses(user.id);
     // const result = await getUserExpenses(options);
-    console.log("expense=", result);
+
     res.status(200).json({ result });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ error });
+    logger.error("Failed to fetch current year expense", {
+      userId: user?.id,
+      body: req.body,
+      error: error.message,
+      stack: error.stack,
+    });
+
+    error.statusCode = 500;
+    next(error);
   }
 };
 

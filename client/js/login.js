@@ -2,7 +2,7 @@ const form = document.querySelector(".login-form");
 const forgotPasswordBtn = document.querySelector(".forgot_password");
 const overlay = document.querySelector(".overlay");
 const forgotPasswordSection = document.querySelector(
-  ".forgot_password_section"
+  ".forgot_password_section",
 );
 const resetPasswordBtn = document.querySelector(".reset_password_btn");
 const forgotPasswordForm = document.querySelector(".forgot_password_form");
@@ -21,7 +21,7 @@ const loginUser = async function (e) {
       userObj,
       {
         withCredentials: true,
-      }
+      },
     );
     if (response.data.redirectURL) {
       window.location.href = response.data.redirectURL;
@@ -48,7 +48,7 @@ const hideForgotPasswordForm = function () {
 const resetPasswordLink = async function (e) {
   e.preventDefault();
   const registeredEmail = forgotPasswordForm.querySelector(
-    ".forgot_password_email"
+    ".forgot_password_email",
   ).value;
 
   const dataObj = {
@@ -58,7 +58,7 @@ const resetPasswordLink = async function (e) {
   try {
     const response = await axios.post(
       "http://localhost:8000/user-auth/forgot-password",
-      dataObj
+      dataObj,
     );
     hideForgotPasswordForm();
     alert(`${response.data.message}`);
