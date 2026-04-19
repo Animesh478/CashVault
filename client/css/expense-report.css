@@ -150,7 +150,15 @@
 
 /* ========== Start generate pdf button Section ========== */
 
-.generate_pdf_btn {
+.actions {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+}
+
+button {
   margin-top: 10rem;
   border: none;
   outline: none;
@@ -168,7 +176,7 @@
   -o-border-radius: 1rem;
 }
 
-.generate_pdf_btn:hover {
+button:hover {
   background-color: var(--box-shadow-color);
 }
 

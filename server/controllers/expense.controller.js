@@ -1,9 +1,14 @@
+// import { v4 as uuidv4 } from "uuid";
+const { v4: uuidv4 } = require("uuid");
+
 const { generateCategory } = require("../services/aiCategory.service");
+const uploadToS3 = require("../services/aws.service");
 const {
   getUserExpenses,
   createUserExpense,
   deleteExpenseFromDB,
   getCurrentYearExpenses,
+  getAllExpenses,
 } = require("../services/expense.service");
 const { updateTotalExpenses } = require("../services/user.service");
 const logger = require("../utils/logger");
@@ -43,7 +48,7 @@ const addExpense = async function (req, res, next) {
   }
 };
 
-const getAllExpenses = async function (req, res, next) {
+const getExpenses = async function (req, res, next) {
   const user = req.user;
   const { page, limit } = req.query;
 
@@ -82,6 +87,31 @@ const getAllExpenses = async function (req, res, next) {
   }
 };
 
+const downloadAllExpenses = async function (req, res, next) {
+  const user = req.user;
+  try {
+    const result = await getAllExpenses(user.id);
+    let fileContent = "";
+    result.forEach(
+      (expense) =>
+        (fileContent += `Date: ${expense.createdAt} Amount: ${expense.expenseAmount} Category: ${expense.category} Description: ${expense.description}\n`),
+    );
+    const fileName = `expenses-${uuidv4()}.txt`;
+    const generatedUrl = await uploadToS3(fileContent, fileName);
+    console.log(fileContent);
+    res.status(200).json({ success: true, downloadUrl: generatedUrl });
+  } catch (error) {
+    logger.error("Failed to download all expenses", {
+      userId: user?.id,
+      body: req.body,
+      error: error.message,
+      stack: error.stack,
+    });
+    error.statusCode = 500;
+    next(error);
+  }
+};
+
 const deleteExpense = async function (req, res, next) {
   const { expenseId } = req.params;
   const user = req.user;
@@ -105,18 +135,8 @@ const deleteExpense = async function (req, res, next) {
 
 const fetchCurrentYearExpenses = async function (req, res, next) {
   const user = req.user;
-  // const options = {
-  //   user: {
-  //     userId: user.id,
-  //   },
-  //   date: {
-  //     currentYear: new Date().getFullYear(),
-  //   },
-  // };
   try {
     const result = await getCurrentYearExpenses(user.id);
-    // const result = await getUserExpenses(options);
-
     res.status(200).json({ result });
   } catch (error) {
     logger.error("Failed to fetch current year expense", {
@@ -133,7 +153,8 @@ const fetchCurrentYearExpenses = async function (req, res, next) {
 
 module.exports = {
   addExpense,
-  getAllExpenses,
+  getExpenses,
+  downloadAllExpenses,
   deleteExpense,
   fetchCurrentYearExpenses,
 };

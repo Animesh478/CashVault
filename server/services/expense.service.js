@@ -25,6 +25,22 @@ const getUserExpenses = async function (options) {
   }
 };
 
+const getAllExpenses = async function (userId) {
+  try {
+    const result = await ExpenseModel.findAll({
+      where: {
+        userId,
+      },
+
+      raw: true,
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const getCurrentYearExpenses = async function (userId) {
   const currentYear = new Date().getFullYear();
   try {
@@ -102,4 +118,5 @@ module.exports = {
   createUserExpense,
   deleteExpenseFromDB,
   getCurrentYearExpenses,
+  getAllExpenses,
 };

@@ -6,6 +6,7 @@ const currentDateTimeEl = document.querySelector(".current_date_time");
 const currentMonthEl = document.querySelector(".current_month");
 const currentYearEl = document.querySelector(".current_year");
 const generatePdfBtn = document.querySelector(".generate_pdf_btn");
+const downloadAllBtn = document.querySelector(".generate_all_expenses");
 
 const currentDate = new Date().toLocaleString("en-IN", {
   dateStyle: "full",
@@ -68,9 +69,8 @@ const renderExpenses = function (expense, dailyExpense) {
   expenseRow.querySelector(".date").textContent = dailyExpense.date;
   expenseRow.querySelector(".desc").textContent = expense.description;
   expenseRow.querySelector(".category").textContent = expense.category;
-  expenseRow.querySelector(
-    ".exp_amt"
-  ).textContent = `₹ ${expense.expenseAmount}`;
+  expenseRow.querySelector(".exp_amt").textContent =
+    `₹ ${expense.expenseAmount}`;
 
   monthlyTable.appendChild(expenseRow);
 };
@@ -78,22 +78,20 @@ const renderExpenses = function (expense, dailyExpense) {
 const renderDailyTotal = function (dailyExpense) {
   const dailyTotalTemplate = document.querySelector(".daily_total_template");
   const dailyTotal = dailyTotalTemplate.content.cloneNode(true);
-  dailyTotal.querySelector(
-    ".daily_total_amount"
-  ).textContent = `₹ ${dailyExpense.dayTotal}`;
+  dailyTotal.querySelector(".daily_total_amount").textContent =
+    `₹ ${dailyExpense.dayTotal}`;
 
   monthlyTable.appendChild(dailyTotal);
 };
 
 const renderMonthlyTotal = function (groupedExpenses) {
   const monthlyTotalTemplate = document.querySelector(
-    ".monthly_total_template"
+    ".monthly_total_template",
   );
   const monthlyTotal = monthlyTotalTemplate.content.cloneNode(true);
   const monthlyTotalAmount = calculateMonthly(groupedExpenses);
-  monthlyTotal.querySelector(
-    ".monthly_total_amount"
-  ).textContent = `₹ ${monthlyTotalAmount}`;
+  monthlyTotal.querySelector(".monthly_total_amount").textContent =
+    `₹ ${monthlyTotalAmount}`;
   monthlyExpenseFoot.appendChild(monthlyTotal);
 };
 
@@ -116,9 +114,8 @@ const renderMonthlyExpenses = function (entry) {
   const monthlyTemplate = document.querySelector(".monthly_expense_template");
   const monthlyTotal = monthlyTemplate.content.cloneNode(true);
   monthlyTotal.querySelector(".month").textContent = entry[0];
-  monthlyTotal.querySelector(
-    ".month_total"
-  ).textContent = `₹ ${entry[1].totalMonthlyExpense}`;
+  monthlyTotal.querySelector(".month_total").textContent =
+    `₹ ${entry[1].totalMonthlyExpense}`;
   yearlyTableBody.appendChild(monthlyTotal);
 };
 
@@ -136,9 +133,9 @@ const getAllExpenses = async function () {
       "http://localhost:8000/expense/generateReport",
       {
         withCredentials: true,
-      }
+      },
     );
-    console.log(response.data.result);
+    // console.log(response.data.result);
     const expenses = response.data.result;
     // refactor the data day wise
     const groupedData = expensesGroupedByDate(expenses);
@@ -155,13 +152,9 @@ const getAllExpenses = async function () {
     renderMonthlyTotal(groupedData);
 
     const groupedMonthlyExpenses = groupExpensesByMonth(expenses);
-    // console.log(groupedMonthlyExpenses);
 
-    // console.log(Object.entries(groupedMonthlyExpenses));
     let yearlyTotal = 0;
     Object.entries(groupedMonthlyExpenses).forEach((entry) => {
-      // console.log(entry[0]);
-      // console.log(entry[1]);
       renderMonthlyExpenses(entry);
       yearlyTotal += entry[1].totalMonthlyExpense;
     });
@@ -177,10 +170,34 @@ const getAllExpenses = async function () {
   }
 };
 
+const downloadAllExpenses = async function () {
+  try {
+    const response = await axios.get(
+      "http://localhost:8000/expense/downloadAll",
+      {
+        withCredentials: true,
+      },
+    );
+    const downloadUrl = response.data.downloadUrl;
+    console.log(response);
+    if (downloadUrl) {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = downloadUrl;
+      downloadLink.setAttribute("target", "_blank");
+      document.body.appendChild(downloadLink);
+
+      downloadLink.click();
+      downloadLink.remove();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const downloadAsPdf = function () {
   window.print();
 };
 
 document.addEventListener("DOMContentLoaded", getAllExpenses);
-
 generatePdfBtn.addEventListener("click", downloadAsPdf);
+downloadAllBtn.addEventListener("click", downloadAllExpenses);
