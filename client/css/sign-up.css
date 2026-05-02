@@ -1,3 +1,11 @@
+:root {
+  --primary-green: #00bc2a;
+  --form-background: ##f3f7ff;
+  --placeholder-color: #a0aec0;
+  --primary-teal: #20373f;
+  --secondary-teal: #274c55;
+  --box-shadow-color: #29756f;
+}
 .container {
   background-image: linear-gradient(to right, #b6cefa, #b3d9dc);
   height: 100vh;
@@ -8,7 +16,8 @@
 
 .section-form {
   width: 80rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   background-color: #fff;
   display: grid;
@@ -28,10 +37,12 @@
   & h2 {
     font-size: 3rem;
     margin-bottom: 2rem;
+    color: var(--box-shadow-color);
   }
 
   & h1 {
     font-size: 4rem;
+    color: var(--primary-teal);
   }
 
   & p {
@@ -125,7 +136,7 @@
   font-weight: 500;
   word-spacing: 0.3rem;
   text-transform: uppercase;
-  background-color: #00bc2a;
+  background-color: var(--box-shadow-color);
   border: none;
   margin-top: 2rem;
   padding: 0.8rem 0;
@@ -137,7 +148,7 @@
 }
 
 .section-form .form button:hover {
-  box-shadow: #00bc2a 0px 1px 4px;
+  box-shadow: var(--box-shadow-color) 0px 1px 4px;
   background-color: #f3f7ff;
-  color: #00bc2a;
+  color: var(--box-shadow-color);
 }
