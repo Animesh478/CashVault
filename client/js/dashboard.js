@@ -1,7 +1,6 @@
 const form = document.querySelector(".form");
 const expenseList = document.querySelector(".transactions-list");
 const currentPageEl = document.querySelector(".curr-page");
-// const currentPage = Number(currentPageEl.textContent);
 const limitEl = document.getElementById("limit");
 const limit = Number(limitEl.value);
 const prevPageBtn = document.querySelector(".prev-btn");
