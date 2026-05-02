@@ -87,7 +87,7 @@ const getExpenses = async function (req, res, next) {
   }
 };
 
-const downloadAllExpenses = async function (req, res, next) {
+const downloadExpensesTextFile = async function (req, res, next) {
   const user = req.user;
   try {
     const result = await getAllExpenses(user.id);
@@ -96,9 +96,10 @@ const downloadAllExpenses = async function (req, res, next) {
       (expense) =>
         (fileContent += `Date: ${expense.createdAt} Amount: ${expense.expenseAmount} Category: ${expense.category} Description: ${expense.description}\n`),
     );
-    const fileName = `expenses-${uuidv4()}.txt`;
+    const fileName = `expenses-${uuidv4()}.txt`; //for unique file name
+    //providing the data to s3 as raw text, s3 returns a pre-signed url
     const generatedUrl = await uploadToS3(fileContent, fileName);
-    console.log(fileContent);
+
     res.status(200).json({ success: true, downloadUrl: generatedUrl });
   } catch (error) {
     logger.error("Failed to download all expenses", {
@@ -154,7 +155,7 @@ const fetchCurrentYearExpenses = async function (req, res, next) {
 module.exports = {
   addExpense,
   getExpenses,
-  downloadAllExpenses,
+  downloadExpensesTextFile,
   deleteExpense,
   fetchCurrentYearExpenses,
 };

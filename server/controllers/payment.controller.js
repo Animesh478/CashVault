@@ -108,7 +108,9 @@ const paymentStatus = async function (req, res, next) {
           },
         },
       );
-      return res.status(200).json({ message: "Payment successful" });
+      return res.redirect(
+        `http://localhost:5500/client/pages/paymentStatus.html?status=${latestPayment.payment_status}&order_id=${order_id}`,
+      );
     }
     if (latestPayment.payment_status === "FAILED") {
       await OrderModel.update(

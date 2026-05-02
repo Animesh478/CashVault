@@ -29,6 +29,7 @@ const createJWT = function (user) {
     email: user.email,
     name: user.fullName,
     phoneNumber: user.phoneNumber,
+    isPremium: user.isPremium,
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
@@ -38,6 +39,7 @@ const createJWT = function (user) {
 };
 
 const verifyJWT = function (token) {
+  // if the token is valid, return the decoded payload object
   return jwt.verify(token, process.env.JWT_SECRET_KEY);
 };
 

@@ -5,7 +5,7 @@ const {
   deleteExpense,
   fetchCurrentYearExpenses,
   getExpenses,
-  downloadAllExpenses,
+  downloadExpensesTextFile,
 } = require("../controllers/expense.controller");
 
 const expenseRouter = express.Router();
@@ -18,7 +18,7 @@ expenseRouter
 
 expenseRouter
   .route("/downloadAll")
-  .get(authenticateUserMiddleware, downloadAllExpenses);
+  .get(authenticateUserMiddleware, downloadExpensesTextFile);
 
 expenseRouter
   .route("/deleteExpense/:expenseId")

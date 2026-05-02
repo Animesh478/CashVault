@@ -23,6 +23,16 @@ currentDateTimeEl.textContent = currentDate;
 currentMonthEl.textContent = `${currentMonth}, ${currentYear}`;
 currentYearEl.textContent = currentYear;
 
+const getUser = async function () {
+  const result = await axios.get("http://localhost:8000/user/me", {
+    withCredentials: true,
+  });
+  const isPremium = result.data.user.isPremium;
+  if (isPremium) {
+    downloadAllBtn.classList.remove("hidden");
+  }
+};
+
 const calculateMonthly = function (groupedExpenses) {
   // todo - calculate monthly expense
   return Object.values(groupedExpenses).reduce((total, day) => {
@@ -127,7 +137,6 @@ const renderYearlyTotal = function (yearlyTotal) {
 };
 
 const getAllExpenses = async function () {
-  // todo - get all the expenses
   try {
     const response = await axios.get(
       "http://localhost:8000/expense/generateReport",
@@ -135,7 +144,6 @@ const getAllExpenses = async function () {
         withCredentials: true,
       },
     );
-    // console.log(response.data.result);
     const expenses = response.data.result;
     // refactor the data day wise
     const groupedData = expensesGroupedByDate(expenses);
@@ -201,3 +209,4 @@ const downloadAsPdf = function () {
 document.addEventListener("DOMContentLoaded", getAllExpenses);
 generatePdfBtn.addEventListener("click", downloadAsPdf);
 downloadAllBtn.addEventListener("click", downloadAllExpenses);
+getUser();

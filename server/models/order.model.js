@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     orderId: {
       type: DataTypes.STRING,
       field: "order_id",
+      primaryKey: true,
     },
     orderAmount: {
       type: DataTypes.INTEGER,

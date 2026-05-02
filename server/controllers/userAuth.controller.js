@@ -12,6 +12,7 @@ const logger = require("../utils/logger");
 const userSignUp = async function (req, res, next) {
   const { name, email, password, phoneNumber } = req.body;
   try {
+    // checking if the user already exists
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
       return res.status(409).json({ message: "User already exists" });

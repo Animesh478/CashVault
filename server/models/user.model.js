@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       field: "phone_number",
     },
     isPremium: {
-      type: DataTypes.STRING,
-      defaultValue: "false",
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
       field: "is_premium",
     },
     totalExpenses: {

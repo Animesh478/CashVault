@@ -4,7 +4,7 @@ const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const cashfree = new Cashfree(
   CFEnvironment.SANDBOX,
   process.env.CASHFREE_APP_ID,
-  process.env.CASHFREE_SECRET_KEY
+  process.env.CASHFREE_SECRET_KEY,
 );
 
 const createOrder = async function ({
@@ -39,7 +39,7 @@ const createOrder = async function ({
     return response;
   } catch (error) {
     console.log(error);
-    throw error
+    throw error;
   }
 };
 
@@ -50,7 +50,7 @@ const verifyPaymentStatus = async function (orderId) {
     return response.data; //response.data is an array of payments
   } catch (error) {
     console.log(error);
-    throw error
+    throw error;
   }
 };
 

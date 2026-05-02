@@ -16,6 +16,7 @@ const s3Client = new S3Client({
 const uploadToS3 = async function (fileContent, fileName) {
   try {
     const bucketName = process.env.AWS_BUCKET_NAME;
+    // putting the data as text file into s3
     const putCommand = new PutObjectCommand({
       Bucket: bucketName,
       Key: fileName,
@@ -24,13 +25,14 @@ const uploadToS3 = async function (fileContent, fileName) {
     });
     await s3Client.send(putCommand);
 
+    // getting the text file from s3
     const getCommand = new GetObjectCommand({
       Bucket: bucketName,
       Key: fileName,
       ResponseContentDisposition: 'attachment; filename="My_Expenses.txt"',
     });
 
-    // the pre-signed url will expire in 5 minutes
+    // generating a pre-signed url that will expire in 5 minutes
     const downloadUrl = await getSignedUrl(s3Client, getCommand, {
       expiresIn: 300,
     });

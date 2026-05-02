@@ -11,11 +11,12 @@ const buyPremium = async function () {
       {},
       {
         withCredentials: true,
-      }
+      },
     );
-    console.log(data);
+
     const paymentSessionId = data.result.payment_session_id;
-    console.log(paymentSessionId);
+
+    // opens the payment checkout page
     let checkoutOptions = {
       paymentSessionId,
       redirectTarget: "_self",

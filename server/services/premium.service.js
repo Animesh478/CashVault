@@ -1,5 +1,4 @@
-const { UserModel, ExpenseModel, sequelize } = require("../models");
-const { getAllExpenses } = require("./expense.service");
+const { UserModel, sequelize } = require("../models");
 
 const getUserAndAggregateExpense = async function () {
   try {
@@ -17,14 +16,6 @@ const getUserAndAggregateExpense = async function () {
   }
 };
 
-const getAllExpensesFile = async function () {
-  try {
-    const response = await getAllExpenses();
-    console.log(response);
-  } catch (error) {}
-};
-
 module.exports = {
   getUserAndAggregateExpense,
-  getAllExpensesFile,
 };

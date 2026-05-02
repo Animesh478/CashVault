@@ -8,17 +8,23 @@ const prevPageBtn = document.querySelector(".prev-btn");
 const nextPageBtn = document.querySelector(".next-btn");
 const paginationSection = document.querySelector(".pages_container");
 const logoutLink = document.querySelector(".logout-link");
+const goPremiumBtn = document.querySelector(".premium-btn");
 
 const getUserDetails = async function () {
   try {
     const result = await axios.get("http://localhost:8000/user/me", {
       withCredentials: true,
     });
+    console.log(result);
     const welcomeMessageElement = document.querySelector(".welcome-message");
     const greeting = document.createElement("h1");
     greeting.textContent =
       `Welcome, ${result.data.user.fullName}`.toUpperCase();
     welcomeMessageElement.appendChild(greeting);
+
+    if (result.data.user.isPremium) {
+      goPremiumBtn.classList.add("hidden");
+    }
   } catch (error) {
     console.log(error.message);
   }
@@ -45,8 +51,6 @@ const displayAllExpenses = async function () {
   const pageVal = Number(sessionStorage.getItem("page")) || 1;
   const limitVal = Number(localStorage.getItem("limit")) || limit;
   limitEl.value = limitVal; //the value in select-option persists
-
-  // console.log(pageVal, limitVal);
 
   const { result, hasNextPage } = await getAllExpenses(pageVal, limitVal);
 
@@ -183,6 +187,16 @@ const logoutUser = async function (e) {
   }
 };
 
+// const payPremium = async function () {
+//   axios.post(
+//     "http://localhost:8000/payment/create-order",
+//     {},
+//     {
+//       withCredentials: true,
+//     },
+//   );
+// };
+
 const init = async function () {
   await displayAllExpenses();
   await getUserDetails();
@@ -194,5 +208,6 @@ prevPageBtn.addEventListener("click", showPrevPageExpenses);
 nextPageBtn.addEventListener("click", showNextPageExpenses);
 limitEl.addEventListener("change", showExpensesForUpdatedLimit);
 logoutLink.addEventListener("click", logoutUser);
+// goPremiumBtn.addEventListener("click", payPremium);
 
 init();

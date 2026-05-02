@@ -8,10 +8,17 @@ const getCurrentUser = async function (req, res) {
   }
   try {
     const result = await getUserData(user.email);
+    // console.log(result);
     if (!result) {
       return res.status(404).json({ message: "User not found" });
     }
-    return res.status(200).json({ user: result });
+    return res.status(200).json({
+      user: {
+        email: result.email,
+        fullName: result.fullName,
+        isPremium: result.isPremium,
+      },
+    });
   } catch (error) {
     logger.error("Failed to fetch user", {
       userId: user?.id,
