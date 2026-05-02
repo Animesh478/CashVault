@@ -9,6 +9,7 @@ const nextPageBtn = document.querySelector(".next-btn");
 const paginationSection = document.querySelector(".pages_container");
 const logoutLink = document.querySelector(".logout-link");
 const goPremiumBtn = document.querySelector(".premium-btn");
+const leaderboardButton = document.querySelector(".leaderboard_btn");
 
 const getUserDetails = async function () {
   try {
@@ -24,6 +25,7 @@ const getUserDetails = async function () {
 
     if (result.data.user.isPremium) {
       goPremiumBtn.classList.add("hidden");
+      leaderboardButton.classList.remove("hidden");
     }
   } catch (error) {
     console.log(error.message);
