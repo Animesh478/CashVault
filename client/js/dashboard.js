@@ -23,6 +23,7 @@ const getUserDetails = async function () {
     welcomeMessageElement.appendChild(greeting);
 
     if (result.data.user.isPremium) {
+      console.log("dinesh");
       goPremiumBtn.classList.add("hidden");
       leaderboardButton.classList.remove("hidden");
     }
