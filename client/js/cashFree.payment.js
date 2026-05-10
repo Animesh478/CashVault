@@ -1,3 +1,4 @@
+import { API_BASE } from "./config.js";
 const buyPremiumBtn = document.querySelector(".premium-btn");
 const cashfree = window.Cashfree({
   mode: "sandbox",
@@ -7,7 +8,7 @@ const cashfree = window.Cashfree({
 const buyPremium = async function () {
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/payment/create-order",
+      `${API_BASE}/payment/create-order`,
       {},
       {
         withCredentials: true,

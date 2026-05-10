@@ -1,3 +1,5 @@
+import { API_BASE } from "./config.js";
+
 const leaderboardBtn = document.querySelector(".leaderboard_btn");
 const overlay = document.getElementById("overlay");
 const leaderboardModal = document.querySelector(".container_leaderboard");
@@ -5,7 +7,7 @@ const rankingList = document.querySelector(".ranking_list");
 
 // ? open and close leaderboard modal
 const showLeaderboard = async function () {
-  const result = await axios.get("http://localhost:8000/premium/leaderboard", {
+  const result = await axios.get(`${API_BASE}premium/leaderboard`, {
     withCredentials: true,
   });
 

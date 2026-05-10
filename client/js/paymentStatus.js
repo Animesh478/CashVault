@@ -1,3 +1,5 @@
+import { FRONTEND_BASE } from "./config.js";
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const messageElement = document.querySelector(".message");
@@ -14,7 +16,7 @@ const message =
 messageElement.textContent = message;
 
 const redirectHomepage = function () {
-  window.location.replace("http://localhost:5500/client/pages/login.html");
+  window.location.replace(`${FRONTEND_BASE}client/pages/login.html`);
 };
 
 homePageBtn.addEventListener("click", redirectHomepage);

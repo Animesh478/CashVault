@@ -1,3 +1,5 @@
+import { API_BASE } from "./config.js";
+
 const resetPasswordForm = document.querySelector(".reset_password");
 const confirmPasswordEl = document.querySelector(".confirm_new_password");
 const newPasswordEl = resetPasswordForm.querySelector(".new_password");
@@ -25,10 +27,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   //todo: if there is no id throw error
 
   try {
-    const result = await axios.get(
-      `http://localhost:8000/user-auth/resetPassword/${id}`,
-    );
-    console.log("result-", result);
+    const result = await axios.get(`${API_BASE}user-auth/resetPassword/${id}`);
+    // console.log("result-", result);
     // if the link is active show the form to reset the password
     const isActive = result.data.result.isActive;
     if (isActive) {
@@ -52,7 +52,7 @@ resetPasswordForm.addEventListener("submit", async (e) => {
   };
   try {
     const response = await axios.post(
-      `http://localhost:8000/user-auth/change-password`,
+      `${API_BASE}user-auth/change-password`,
       dataObj,
     );
     if (response.data.redirectURL) {

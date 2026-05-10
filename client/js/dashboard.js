@@ -1,3 +1,5 @@
+import { API_BASE } from "./config.js";
+
 const form = document.querySelector(".form");
 const expenseList = document.querySelector(".transactions-list");
 const currentPageEl = document.querySelector(".curr-page");
@@ -12,7 +14,7 @@ const leaderboardButton = document.querySelector(".leaderboard_btn");
 
 const getUserDetails = async function () {
   try {
-    const result = await axios.get("http://localhost:8000/user/me", {
+    const result = await axios.get(`${API_BASE}user/me`, {
       withCredentials: true,
     });
     console.log(result);
@@ -35,7 +37,7 @@ const getUserDetails = async function () {
 const getAllExpenses = async function (page, limit) {
   try {
     const result = await axios.get(
-      `http://localhost:8000/expense/allExpenses?page=${page}&limit=${limit}`,
+      `${API_BASE}expense/allExpenses?page=${page}&limit=${limit}`,
       {
         withCredentials: true,
       },
@@ -137,7 +139,7 @@ const submitExpenseForm = async function (e) {
   const expenseObj = { expenseAmount, description, category };
   form.reset();
 
-  await axios.post("http://localhost:8000/expense/addExpense", expenseObj, {
+  await axios.post(`${API_BASE}expense/addExpense`, expenseObj, {
     withCredentials: true,
   });
 
@@ -150,12 +152,9 @@ const deleteExpense = async function (e) {
   const expenseEl = deleteBtn.closest(".transaction");
   const expenseId = expenseEl.dataset.expenseId;
   try {
-    await axios.delete(
-      `http://localhost:8000/expense/deleteExpense/${expenseId}`,
-      {
-        withCredentials: true,
-      },
-    );
+    await axios.delete(`${API_BASE}expense/deleteExpense/${expenseId}`, {
+      withCredentials: true,
+    });
     expenseEl.remove();
 
     const expensesCount = document.querySelectorAll(".transaction");
@@ -175,7 +174,7 @@ const logoutUser = async function (e) {
 
   try {
     const result = await axios.post(
-      "http://localhost:8000/user-auth/logout",
+      `${API_BASE}user-auth/logout`,
       {},
       {
         withCredentials: true,

@@ -1,3 +1,5 @@
+import { API_BASE } from "./config.js";
+
 const monthlyTable = document.querySelector(".monthly_table-body");
 const monthlyExpenseFoot = document.querySelector(".monthly_table-foot");
 const yearlyTableBody = document.querySelector(".yearly_table-body");
@@ -24,7 +26,7 @@ currentMonthEl.textContent = `${currentMonth}, ${currentYear}`;
 currentYearEl.textContent = currentYear;
 
 const getUser = async function () {
-  const result = await axios.get("http://localhost:8000/user/me", {
+  const result = await axios.get(`${API_BASE}user/me`, {
     withCredentials: true,
   });
   const isPremium = result.data.user.isPremium;
@@ -138,12 +140,9 @@ const renderYearlyTotal = function (yearlyTotal) {
 
 const getAllExpenses = async function () {
   try {
-    const response = await axios.get(
-      "http://localhost:8000/expense/generateReport",
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await axios.get(`${API_BASE}expense/generateReport`, {
+      withCredentials: true,
+    });
     const expenses = response.data.result;
     // refactor the data day wise
     const groupedData = expensesGroupedByDate(expenses);
@@ -180,12 +179,9 @@ const getAllExpenses = async function () {
 
 const downloadAllExpenses = async function () {
   try {
-    const response = await axios.get(
-      "http://localhost:8000/expense/downloadAll",
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await axios.get(`${API_BASE}expense/downloadAll`, {
+      withCredentials: true,
+    });
     const downloadUrl = response.data.downloadUrl;
     console.log(response);
     if (downloadUrl) {

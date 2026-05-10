@@ -1,3 +1,5 @@
+import { API_BASE } from "./config.js";
+
 const form = document.querySelector(".login-form");
 const forgotPasswordBtn = document.querySelector(".forgot_password");
 const overlay = document.querySelector(".overlay");
@@ -16,13 +18,9 @@ const loginUser = async function (e) {
 
   const userObj = { email, password };
   try {
-    const response = await axios.post(
-      "http://localhost:8000/user-auth/login",
-      userObj,
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await axios.post(`${API_BASE}user-auth/login`, userObj, {
+      withCredentials: true,
+    });
     if (response.data.redirectURL) {
       window.location.href = response.data.redirectURL;
     }
@@ -57,7 +55,7 @@ const resetPasswordLink = async function (e) {
 
   try {
     const response = await axios.post(
-      "http://localhost:8000/user-auth/forgot-password",
+      `${API_BASE}user-auth/forgot-password`,
       dataObj,
     );
     hideForgotPasswordForm();
