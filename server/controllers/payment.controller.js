@@ -109,7 +109,7 @@ const paymentStatus = async function (req, res, next) {
         },
       );
       return res.redirect(
-        `http://localhost:5500/client/pages/paymentStatus.html?status=${latestPayment.payment_status}&order_id=${order_id}`,
+        `${process.env.FRONTEND_URL}/client/pages/paymentStatus.html?status=${latestPayment.payment_status}&order_id=${order_id}`,
       );
     }
     if (latestPayment.payment_status === "FAILED") {

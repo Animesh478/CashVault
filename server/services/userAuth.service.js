@@ -54,7 +54,7 @@ const sendPasswordResetEmail = async function (email) {
     const entryInstance = await ForgotPasswordModel.create({ userId: user.id });
     const entry = entryInstance.toJSON();
 
-    const resetLink = `http://localhost:5500/client/pages/reset-password.html?id=${entry.id}`;
+    const resetLink = `${process.env.FRONTEND_URL}/client/pages/reset-password.html?id=${entry.id}`;
 
     let emailAPI = new TransactionalEmailsApi();
     emailAPI.setApiKey(

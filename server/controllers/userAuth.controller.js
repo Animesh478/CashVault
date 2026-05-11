@@ -61,7 +61,7 @@ const userLogin = async function (req, res, next) {
         path: "/",
         maxAge: 24 * 60 * 60 * 1000,
       });
-      const redirectURL = "http://localhost:5500/client/pages/dashboard.html";
+      const redirectURL = `${process.env.FRONTEND_URL}/client/pages/dashboard.html`;
       return res.status(200).json({ message: "Login successful", redirectURL });
     } else {
       logger.warn("Incorrect credentials", {
@@ -135,7 +135,7 @@ const changePassword = async function (req, res, next) {
     const { urlId, newPassword } = req.body;
     await updatePassword(urlId, newPassword);
 
-    const redirectURL = "http://localhost:5500/client/pages/login.html";
+    const redirectURL = `${process.env.FRONTEND_URL}/client/pages/login.html`;
     return res
       .status(200)
       .json({ success: "Password updated successfully", redirectURL });
@@ -158,7 +158,7 @@ const userLogout = function (req, res) {
     sameSite: "lax",
     path: "/",
   });
-  const redirectURL = "http://localhost:5500/client/pages/login.html";
+  const redirectURL = `${process.env.FRONTEND_URL}/client/pages/login.html`;
   res
     .status(200)
     .json({ success: "You have been logged out successfully", redirectURL });

@@ -28,7 +28,7 @@ const createOrder = async function ({
       customer_phone: customerPhone,
     },
     order_meta: {
-      return_url: `http://localhost:8000/payment/payment-status?order_id=${orderId}`,
+      return_url: `${process.env.BACKEND_URL}/payment/payment-status?order_id=${orderId}`,
       payment_methods: "cc,dc,upi,nb",
     },
     order_expiry_time: formattedExpiryTime,

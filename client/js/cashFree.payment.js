@@ -8,7 +8,7 @@ const cashfree = window.Cashfree({
 const buyPremium = async function () {
   try {
     const { data } = await axios.post(
-      `${API_BASE}/payment/create-order`,
+      `${API_BASE}payment/create-order`,
       {},
       {
         withCredentials: true,

@@ -25,7 +25,6 @@ const getUserDetails = async function () {
     welcomeMessageElement.appendChild(greeting);
 
     if (result.data.user.isPremium) {
-      console.log("dinesh");
       goPremiumBtn.classList.add("hidden");
       leaderboardButton.classList.remove("hidden");
     }
@@ -42,7 +41,7 @@ const getAllExpenses = async function (page, limit) {
         withCredentials: true,
       },
     );
-    console.log(result);
+    // console.log(result);
     return result.data;
   } catch (error) {
     console.log(error.message);
