@@ -7,7 +7,7 @@ const ExpenseModel = require("./expense.model")(sequelize, DataTypes);
 const OrderModel = require("./order.model")(sequelize, DataTypes);
 const ForgotPasswordModel = require("./forgotPassword.model")(
   sequelize,
-  DataTypes
+  DataTypes,
 );
 
 UserModel.hasMany(ExpenseModel, {
