@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+console.log("inside db.js");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
