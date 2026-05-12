@@ -1,10 +1,13 @@
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
-console.log("inside config file");
-console.log("dialect-", process.env.DB_DIALECT.trim());
-console.log("NODE_ENV =", process.env.NODE_ENV);
-console.log("db name =", process.env.DB_NAME);
+console.log("CONFIG LOADED BY SEQUELIZE-CLI");
+console.log({
+  NODE_ENV: process.env.NODE_ENV,
+  DB_HOST: process.env.DB_HOST,
+  DB_USER: process.env.DB_USER,
+  DB_NAME: process.env.DB_NAME,
+});
 
 module.exports = {
   development: {
