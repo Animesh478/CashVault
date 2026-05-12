@@ -5,7 +5,7 @@ console.log("CONFIG LOADED BY SEQUELIZE-CLI");
 console.log({
   NODE_ENV: process.env.NODE_ENV,
   DB_HOST: process.env.DB_HOST,
-  DB_USER: process.env.DB_USER,
+  DB_USER: process.env.DB_USERNAME,
   DB_NAME: process.env.DB_NAME,
 });
 
