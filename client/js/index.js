@@ -1,4 +1,4 @@
-import { FRONTEND_BASE } from "./config.js";
+import { FRONTEND_BASE } from "/config.js";
 
 const signUpBtn = document.querySelector(".cta-signUp");
 const loginBtn = document.querySelector(".cta-login");
