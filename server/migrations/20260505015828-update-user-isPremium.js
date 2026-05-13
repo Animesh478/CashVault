@@ -10,7 +10,7 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     await queryInterface.sequelize.query(`
-      UPDATE Users
+      UPDATE users
       SET is_premium =
         CASE
           WHEN is_premium = 'true' THEN 1
