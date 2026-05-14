@@ -1,4 +1,4 @@
-import { API_BASE } from "./config.js";
+import { API_BASE } from "/js/config.js";
 
 const leaderboardBtn = document.querySelector(".leaderboard_btn");
 const overlay = document.getElementById("overlay");

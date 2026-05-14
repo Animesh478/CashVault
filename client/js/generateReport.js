@@ -1,4 +1,4 @@
-import { API_BASE } from "./config.js";
+import { API_BASE } from "/js/config.js";
 
 const monthlyTable = document.querySelector(".monthly_table-body");
 const monthlyExpenseFoot = document.querySelector(".monthly_table-foot");

@@ -1,4 +1,4 @@
-import { API_BASE } from "./config.js";
+import { API_BASE } from "/js/config.js";
 
 const form = document.querySelector(".login-form");
 const forgotPasswordBtn = document.querySelector(".forgot_password");

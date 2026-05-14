@@ -1,4 +1,4 @@
-import { API_BASE } from "./config.js";
+import { API_BASE } from "/js/config.js";
 const buyPremiumBtn = document.querySelector(".premium-btn");
 const cashfree = window.Cashfree({
   mode: "sandbox",

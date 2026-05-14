@@ -1,4 +1,4 @@
-import { API_BASE } from "./config.js";
+import { API_BASE } from "/js/config.js";
 
 const resetPasswordForm = document.querySelector(".reset_password");
 const confirmPasswordEl = document.querySelector(".confirm_new_password");
