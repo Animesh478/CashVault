@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: "password_reset_requests",
+      freezeTableName: true,
     },
   );
   return forgotPassword;
